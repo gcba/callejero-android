@@ -28,7 +28,7 @@ public class AddressSearchPresenter {
 
     private CacheManager cacheManager;
     private AddressSearchView view;
-
+    private List<StandardizedAddress> addressList = new ArrayList<>();
     public AddressSearchPresenter(Context context){
         cacheManager = new CacheManager(context);
     }
@@ -76,6 +76,8 @@ public class AddressSearchPresenter {
             view.onStartSearch();
         }
 
+        addressList = new ArrayList<>();
+
         CallejeroManager.getInstance().normalizeQuery(query, onlyFromCABA, new SearchCallback() {
             @Override
             public void onSuccess(NormalizeResponse normalize) {
@@ -90,7 +92,8 @@ public class AddressSearchPresenter {
                 }
 
                 if (!normalize.getAddressList().isEmpty()) {
-                    view.onResultSuccess(query, normalize.getAddressList());
+                    addressList.addAll(normalize.getAddressList());
+                    view.onResultSuccess(query, addressList);
                 }
 
             }
@@ -110,7 +113,7 @@ public class AddressSearchPresenter {
                     @Override
                     public void onSuccess(Places places) {
                         ArrayList<PlaceInstancias> instancias = places.getInstancias();
-                        List<StandardizedAddress> addressList = new ArrayList<>();
+                        //List<StandardizedAddress> addressListFromPlace = new ArrayList<>();
                         for (PlaceInstancias object: instancias) {
                             StandardizedAddress adress = new StandardizedAddress();
                             adress.setName("P - " + object.getNombre() /*+ object.getId()*/);
@@ -143,5 +146,10 @@ public class AddressSearchPresenter {
         if (address != null){
             cacheManager.saveAddress(address);
         }
+    }
+
+
+    private synchronized void addResult(){
+
     }
 }

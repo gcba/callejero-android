@@ -59,7 +59,6 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
     private boolean showPin;
     private boolean showLabel;
     private String direccion;
-    List<StandardizedAddress> addressListNormalizada;
     private LinearLayout rootLayout;
     private String x;
     private String y;
@@ -217,7 +216,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                                     CallejeroManager.getInstance().normalizeQuery(direccion, true, new SearchCallback() {
                                         @Override
                                         public void onSuccess(NormalizeResponse normalize) {
-                                            addressListNormalizada = normalize.getAddressList();
+                                            List<StandardizedAddress> addressListNormalizada= normalize.getAddressList();
                                             //TODO : si el size es mayor o igual a 1
                                             StandardizedAddress standardizedAddress = addressListNormalizada.get(0);
                                             StandardizedAddress address = (StandardizedAddress) list.getItemAtPosition(position);
