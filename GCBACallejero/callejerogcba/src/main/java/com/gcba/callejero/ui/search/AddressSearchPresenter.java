@@ -1,6 +1,7 @@
 package com.gcba.callejero.ui.search;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
 import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.SearchCallback;
@@ -78,6 +79,58 @@ public class AddressSearchPresenter {
 
         addressList = new ArrayList<>();
 
+        searchNormalizeAdress(query, onlyFromCABA);
+
+        searchPlaces(query, showPlaces, charSequence);
+
+    }
+
+
+    public void saveSelection(StandardizedAddress address){
+        if (address != null){
+            cacheManager.saveAddress(address);
+        }
+    }
+
+    private void searchPlaces(final String query, boolean showPlaces, CharSequence charSequence) {
+        if (charSequence.length() >= 4){
+
+            if (showPlaces){
+                CallejeroManager.getInstance().loadPlaces(query, new LocationCallBackPlaces() {
+                    @Override
+                    public void onSuccess(Places places) {
+
+                        List<StandardizedAddress> addressListFromPlace = placesToStandardizedAddresses(places);
+
+                        addResult(query,addressListFromPlace);
+
+                    }
+
+                    @NonNull
+                    private List<StandardizedAddress> placesToStandardizedAddresses(Places places) {
+                        ArrayList<PlaceInstancias> instancias = places.getInstancias();
+                        List<StandardizedAddress> addressListFromPlace = new ArrayList<>();
+                        for (PlaceInstancias object: instancias) {
+                            StandardizedAddress adress = new StandardizedAddress();
+                            adress.setName("P - " + object.getNombre() /*+ object.getId()*/);
+                            adress.setType("PLACE");
+                            adress.setIdPlaceInstance(object.getId());
+                            addressListFromPlace.add(adress);
+                        }
+                        return addressListFromPlace;
+                    }
+
+                    @Override
+                    public void onError(Throwable error) {
+
+                    }
+                });
+            }
+
+        }
+    }
+
+    private void searchNormalizeAdress(final String query, boolean onlyFromCABA) {
         CallejeroManager.getInstance().normalizeQuery(query, onlyFromCABA, new SearchCallback() {
             @Override
             public void onSuccess(NormalizeResponse normalize) {
@@ -92,8 +145,7 @@ public class AddressSearchPresenter {
                 }
 
                 if (!normalize.getAddressList().isEmpty()) {
-                    addressList.addAll(normalize.getAddressList());
-                    view.onResultSuccess(query, addressList);
+                    addResult(query,normalize.getAddressList());
                 }
 
             }
@@ -103,53 +155,10 @@ public class AddressSearchPresenter {
                 view.onResultError();
             }
         });
-
-
-
-        if (charSequence.length() >= 4){
-
-            if (showPlaces){
-                CallejeroManager.getInstance().loadPlaces(query, new LocationCallBackPlaces() {
-                    @Override
-                    public void onSuccess(Places places) {
-                        ArrayList<PlaceInstancias> instancias = places.getInstancias();
-                        //List<StandardizedAddress> addressListFromPlace = new ArrayList<>();
-                        for (PlaceInstancias object: instancias) {
-                            StandardizedAddress adress = new StandardizedAddress();
-                            adress.setName("P - " + object.getNombre() /*+ object.getId()*/);
-                            adress.setType("PLACE");
-                            adress.setIdPlaceInstance(object.getId());
-                            addressList.add(adress);
-                        }
-
-
-
-                        view.onResultSuccess(query, addressList);
-                        //view22222.onResultSuccess2(query, places);
-                        //System.out.println("oooooooooooooook");
-
-                    }
-
-                    @Override
-                    public void onError(Throwable error) {
-
-                    }
-                });
-            }
-
-        }
-
-
     }
 
-    public void saveSelection(StandardizedAddress address){
-        if (address != null){
-            cacheManager.saveAddress(address);
-        }
-    }
-
-
-    private synchronized void addResult(){
-
+    private synchronized void addResult(final String query,List<StandardizedAddress> partialList){
+        addressList.addAll(partialList);
+        view.onResultSuccess(query, addressList);
     }
 }
