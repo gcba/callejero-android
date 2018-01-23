@@ -82,8 +82,8 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
 
         presenter = new AddressSearchPresenter(getApplicationContext());
 
-        showPin = getIntent().getBooleanExtra("_SHOW_PIN_",false);
-        showLabel = getIntent().getBooleanExtra("_SHOW_LABEL_",false);
+        showPin = getIntent().getBooleanExtra(CallejeroCTE.SHOW_PIN,false);
+        showLabel = getIntent().getBooleanExtra(CallejeroCTE.SHOW_LABEL,false);
 
 
 

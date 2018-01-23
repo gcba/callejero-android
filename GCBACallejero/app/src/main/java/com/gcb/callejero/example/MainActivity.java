@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         queFuncionEstaUsando = (TextView) findViewById(R.id.Direccion);
         switchButton = (Switch) findViewById(R.id.switchButton2);
-        switchButton.setChecked(false);
+        switchButton.setChecked(true);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
