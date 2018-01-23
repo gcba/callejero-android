@@ -1,0 +1,4 @@
+<resources>
+    <string name="search_network_error">Se ha producido un error.\nIntente nuevamente</string>
+    <string name="search_empty_results_error">No se han encontrado resultados.\nIntente nuevamente</string>
+</resources>

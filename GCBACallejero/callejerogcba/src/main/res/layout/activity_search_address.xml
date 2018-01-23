@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_background"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/search_address_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetStartWithNavigation="0dp" >
+
+            <android.support.v7.widget.SearchView
+                android:id="@+id/search_address_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <TextView
+            android:id="@+id/currentAddress"
+            android:text="direccionActual"
+            android:visibility="gone"
+            android:textAllCaps="true"
+            android:gravity="center_vertical"
+            android:padding="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <ListView
+                android:id="@+id/search_address_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:divider="@android:color/transparent"
+                android:scrollbars="none"/>
+
+            <ProgressBar
+                android:id="@+id/search_address_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="8dp"
+                android:visibility="gone"/>
+
+
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/search_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="8dp"
+            android:gravity="center"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</LinearLayout>
