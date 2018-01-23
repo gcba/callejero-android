@@ -1,6 +1,6 @@
 package com.gcba.callejero.api;
 
-import com.gcba.callejero.UrlsCallejero;
+import com.gcba.callejero.CallejeroCTE;
 import com.gcba.callejero.model.AddressLatLong;
 import com.gcba.callejero.model.AddressLocation;
 import com.gcba.callejero.model.NormalizeResponse;
@@ -55,24 +55,24 @@ public class ApiManager {
     }
 
     public Observable<NormalizeResponse> normalizeQuery( String query, boolean onlyFromCABA){
-        return api.normalizeQuery(UrlsCallejero.URL_NORMALIZE,query,  true, onlyFromCABA ? excludedCities : "");
+        return api.normalizeQuery(CallejeroCTE.URL_NORMALIZE,query,  true, onlyFromCABA ? excludedCities : "");
     }
 
     public Observable<StandardizedAddress>  normalizeLocation(AddressLocation location){
-        return api.normalizeLocation(UrlsCallejero.URL_NORMALIZE,location.getX(), location.getY());
+        return api.normalizeLocation(CallejeroCTE.URL_NORMALIZE,location.getX(), location.getY());
     }
 
     public Observable<AddressLatLong> addressWithLatLong (AddressLocation location){
-        return api.addressWithLatLong(UrlsCallejero.URL_LATLONG,location.getX(),location.getY())
+        return api.addressWithLatLong(CallejeroCTE.URL_LATLONG,location.getX(),location.getY())
                 .map(parseResponse());
     }
 
     public Observable<Places> searchPlaces(String query) {
-        return api.searchPlaces(UrlsCallejero.URL_EPOK_BUENOSAIRES_GOB_AR_BUSCAR,  query,"5");
+        return api.searchPlaces(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_BUSCAR,  query,"5");
     }
 
     public Observable<PlacesObjectContent> searchPlacesObjectContent(String idQuery) {
-        return api.searchPlacesobjectContent(UrlsCallejero.URL_EPOK_BUENOSAIRES_GOB_AR_GET_OBJECT_CONTENT, idQuery, "4326");
+        return api.searchPlacesobjectContent(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_GET_OBJECT_CONTENT, idQuery, "4326");
     }
 
     private Func1<ResponseBody, AddressLatLong> parseResponse(){

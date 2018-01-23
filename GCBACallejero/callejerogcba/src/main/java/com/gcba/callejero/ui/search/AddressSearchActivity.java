@@ -26,6 +26,7 @@ import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.LocationCallBack;
 import com.gcba.callejero.R;
 import com.gcba.callejero.SearchCallback;
+import com.gcba.callejero.CallejeroCTE;
 import com.gcba.callejero.model.AddressLocation;
 import com.gcba.callejero.model.NormalizeResponse;
 import com.gcba.callejero.model.Places.PlacesLocations;
@@ -173,8 +174,8 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                     public void call(CharSequence charSequence) {
                         currentAddress.setText(charSequence);
                         if(charSequence.length() >= 3) {
-                            boolean onlyFromCABA = getIntent().getBooleanExtra(CallejeroView.SHOW_ADDRESS_FROM_CABA, false);
-                            boolean showPlaces = getIntent().getBooleanExtra(CallejeroView.SHOW_PLACES, false);
+                            boolean onlyFromCABA = getIntent().getBooleanExtra( CallejeroCTE.SHOW_ADDRESS_FROM_CABA, false);
+                            boolean showPlaces = getIntent().getBooleanExtra( CallejeroCTE.SHOW_PLACES, false);
                             presenter.search(charSequence.toString(), onlyFromCABA,showPlaces, charSequence);
                         }else{
 
@@ -337,7 +338,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
 
         presenter.saveSelection(standardizedAddress);
 
-        data.putExtra(CallejeroView.STANDARDIZED_ADDRESS_DATA, standardizedAddress);
+        data.putExtra( CallejeroCTE.STANDARDIZED_ADDRESS_DATA, standardizedAddress);
 
         setResult(RESULT_OK, data);
         finish();

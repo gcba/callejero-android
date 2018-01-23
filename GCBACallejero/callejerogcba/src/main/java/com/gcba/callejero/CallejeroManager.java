@@ -30,12 +30,6 @@ public class CallejeroManager {
     static final int REQUEST_PIN_CODE = 15001;
     static final int REQUEST_CURRENT_CODE = 15002;
 
-    static final String STANDARDIZED_ADDRESS_DATA = "_STANDARDIZED_ADDRESS_DATA_";
-    static final String SHOW_ADDRESS_FROM_CABA = "_SHOW_ADDRESS_FROM_CABA_";
-    static final String SHOW_PIN = "_SHOW_PIN_";
-    static final String SHOW_LABEL = "_SHOW_LABEL_";
-    static final String SHOW_PLACES = "_SHOW_PLACES_" ;
-
     private SparseArray<SelectionCallback> callbacks = new SparseArray<SelectionCallback>();
 
     private ApiManager api = new ApiManager();
@@ -229,10 +223,10 @@ public class CallejeroManager {
 
         callbacks.put(requestCode,callback);
         Intent intent = new Intent(context, AddressSearchActivity.class);
-        intent.putExtra(SHOW_ADDRESS_FROM_CABA, callejeroOptions.getShowOnlyFromCaba());
-        intent.putExtra(SHOW_PIN,callejeroOptions.getShowPin());
-        intent.putExtra(SHOW_LABEL,callejeroOptions.getShowLabel());
-        intent.putExtra(SHOW_PLACES,callejeroOptions.getShowPlaces());
+        intent.putExtra(CallejeroCTE.SHOW_ADDRESS_FROM_CABA, callejeroOptions.getShowOnlyFromCaba());
+        intent.putExtra(CallejeroCTE.SHOW_PIN,callejeroOptions.getShowPin());
+        intent.putExtra(CallejeroCTE.SHOW_LABEL,callejeroOptions.getShowLabel());
+        intent.putExtra(CallejeroCTE.SHOW_PLACES,callejeroOptions.getShowPlaces());
         intent.putExtra(CallejeroView.REQUEST_ID_DATA, requestCode);
         context.startActivityForResult(intent, SEARCH_REQUEST_CODE);
     }
@@ -258,7 +252,7 @@ public class CallejeroManager {
         }else if (resultCode == REQUEST_CURRENT_CODE){
             callbackSelection.onSelectionLabel(data.getExtras().getString("current"));
         } else {
-            callbackSelection.onAddressSelection((StandardizedAddress) data.getParcelableExtra(STANDARDIZED_ADDRESS_DATA));
+            callbackSelection.onAddressSelection((StandardizedAddress) data.getParcelableExtra(CallejeroCTE.STANDARDIZED_ADDRESS_DATA));
         }
     }
 }

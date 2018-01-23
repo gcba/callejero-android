@@ -22,6 +22,7 @@ import com.gcba.callejero.CallejeroOptions;
 import com.gcba.callejero.LocationCallBack;
 import com.gcba.callejero.R;
 import com.gcba.callejero.SelectionCallback;
+import com.gcba.callejero.CallejeroCTE;
 import com.gcba.callejero.model.AddressLocation;
 import com.gcba.callejero.model.StandardizedAddress;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -35,15 +36,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 public class CallejeroView extends RelativeLayout {
 
     static final int REQUEST_SEARCH_CODE = 1001;
-    //TODO : se repiten las constantes con callejero manager, llevar a un lugar comun
-    public static final String STANDARDIZED_ADDRESS_DATA = "_STANDARDIZED_ADDRESS_DATA_";
-    public static final String REQUEST_ID_DATA = "_REQUEST_ID_DATA_";
-    public static final String SHOW_ADDRESS_FROM_CABA = "_SHOW_ADDRESS_FROM_CABA_";
-    public static final String SHOW_PIN = "_SHOW_PIN_";
-    public static final String SHOW_PLACES = "_SHOW_PLACES_" ;
+
     private CallejeroOptions callejeroOptions = new CallejeroOptions();
 
     private static final boolean DEFAULT_ONLY_CABA = false;
+    public static final String REQUEST_ID_DATA = "_REQUEST_ID_DATA_";
 
     private SelectionCallback callback;
 
@@ -231,7 +228,7 @@ public class CallejeroView extends RelativeLayout {
         if(data.getIntExtra(REQUEST_ID_DATA, 0) != getId())
             return;
 
-        selectedAddress = data.getParcelableExtra(STANDARDIZED_ADDRESS_DATA);
+        selectedAddress = data.getParcelableExtra(CallejeroCTE.STANDARDIZED_ADDRESS_DATA);
         hanldeResult(selectedAddress);
     }
 
