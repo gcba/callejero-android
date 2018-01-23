@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GCBACallejero.iml" filepath="$PROJECT_DIR$/GCBACallejero.iml" />
+      <module fileurl="file://$PROJECT_DIR$/GCBACallejero.iml" filepath="$PROJECT_DIR$/GCBACallejero.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/callejerogcba/callejerogcba.iml" filepath="$PROJECT_DIR$/callejerogcba/callejerogcba.iml" />
       <module fileurl="file://$PROJECT_DIR$/callejerogcba/callejerogcba.iml" filepath="$PROJECT_DIR$/callejerogcba/callejerogcba.iml" />
     </modules>
   </component>
