@@ -21,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.LocationCallBack;
@@ -194,8 +195,9 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
 
                     if (address.isPlace()){
                         //TODO : llamar a Object content y luego al normalizador
+                       Toast.makeText(AddressSearchActivity.this,"Buscando dirección ...", Toast.LENGTH_SHORT).show();
 
-                         final String idPlaces = address.getIdPlaceInstance();
+                        final String idPlaces = address.getIdPlaceInstance();
 
                          CallejeroManager.getInstance().loadPlacesObjectContent(idPlaces, new LocationCallbackPlacesObjectCntent() {
                             @Override
@@ -218,8 +220,8 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                                         public void onSuccess(NormalizeResponse normalize) {
                                             List<StandardizedAddress> addressListNormalizada= normalize.getAddressList();
                                             //TODO : si el size es mayor o igual a 1
-                                            StandardizedAddress standardizedAddress = addressListNormalizada.get(0);
-                                            StandardizedAddress address = (StandardizedAddress) list.getItemAtPosition(position);
+                                            StandardizedAddress address = addressListNormalizada.get(0);
+                                         //   StandardizedAddress address = (StandardizedAddress) list.getItemAtPosition(position);
                                             AddressLocation addressLocation = new AddressLocation();
                                             addressLocation.setX(pointX);
                                             addressLocation.setY(pointY);
@@ -227,8 +229,8 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                                             address.setIdPlaceInstance(idPlaces);
                                             address.setStreetCode(address.getStreetCode());
                                             address.setNumber(address.getNumber());
-                                            address.setStreetName(standardizedAddress.getStreetName());
-                                            address.setName(standardizedAddress.getName());
+                                            address.setStreetName(address.getStreetName());
+                                            address.setName(address.getName());
                                             address.setStreetCornerName(address.getStreetCornerName());
                                             address.setType("PLACE");
                                             address.setCityCode(address.getCityCode());
@@ -242,7 +244,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
 
                                         @Override
                                         public void onError(Throwable error) {
-                                            Log.d("CALLEGERO",error.getMessage());
+                                            Log.e("CALLEJERO",error.getMessage());
                                         }
                                     });
 
@@ -259,7 +261,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
 
                                     @Override
                                     public void onError(Throwable error) {
-                                        System.out.println("ERRORRR");
+                                        Log.e("CALLEJERO",error.getMessage());
                                     }
                                 });
 
@@ -269,7 +271,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                             }
                             @Override
                             public void onError(Throwable error) {
-                                Log.d("CALLEGERO",error.getMessage());
+                                Log.e("CALLEJERO",error.getMessage());
                             }
                         });
                     }else {
