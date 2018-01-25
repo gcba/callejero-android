@@ -194,86 +194,8 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                     StandardizedAddress address = (StandardizedAddress) list.getItemAtPosition(position);
 
                     if (address.isPlace()){
-                        //TODO : llamar a Object content y luego al normalizador
-                       Toast.makeText(AddressSearchActivity.this,"Buscando dirección ...", Toast.LENGTH_SHORT).show();
-
-                        final String idPlaces = address.getIdPlaceInstance();
-
-                         CallejeroManager.getInstance().loadPlacesObjectContent(idPlaces, new LocationCallbackPlacesObjectCntent() {
-                            @Override
-                            public void onSuccess(PlacesObjectContent placesTwo) {
-                                direccion = placesTwo.getDireccionNormalizada();
-
-                                String point =  placesTwo.getUbicacion().getControide();
-
-                                final Double pointX = GcbaUtils.parseX(point);
-                                final Double pointY = GcbaUtils.parseY(point);
-                                AddressLocation addressLocation = new AddressLocation();
-                                addressLocation.setX(pointX);
-                                addressLocation.setY(pointY);
-
-
-                                if (direccion != ""){
-
-                                    CallejeroManager.getInstance().normalizeQuery(direccion, true, new SearchCallback() {
-                                        @Override
-                                        public void onSuccess(NormalizeResponse normalize) {
-                                            List<StandardizedAddress> addressListNormalizada= normalize.getAddressList();
-                                            //TODO : si el size es mayor o igual a 1
-                                            StandardizedAddress address = addressListNormalizada.get(0);
-                                         //   StandardizedAddress address = (StandardizedAddress) list.getItemAtPosition(position);
-                                            AddressLocation addressLocation = new AddressLocation();
-                                            addressLocation.setX(pointX);
-                                            addressLocation.setY(pointY);
-
-                                            address.setIdPlaceInstance(idPlaces);
-                                            address.setStreetCode(address.getStreetCode());
-                                            address.setNumber(address.getNumber());
-                                            address.setStreetName(address.getStreetName());
-                                            address.setName(address.getName());
-                                            address.setStreetCornerName(address.getStreetCornerName());
-                                            address.setType("PLACE");
-                                            address.setCityCode(address.getCityCode());
-                                            address.setLocation(addressLocation);
-
-                                            searchView.setQuery(address.getName(), false);
-                                            hideKeyboard();
-                                            deliverResult(address);
-
-                                        }
-
-                                        @Override
-                                        public void onError(Throwable error) {
-                                            Log.e("CALLEJERO",error.getMessage());
-                                        }
-                                    });
-
-                                }else {
-
-                                CallejeroManager.getInstance().loadAddressLatLong(addressLocation, new LocationCallBack() {
-                                    @Override
-                                    public void onSuccess(StandardizedAddress address) {
-                                        address.setIdPlaceInstance(idPlaces);
-                                        searchView.setQuery(address.getName(), false);
-                                        hideKeyboard();
-                                        deliverResult(address);
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable error) {
-                                        Log.e("CALLEJERO",error.getMessage());
-                                    }
-                                });
-
-                                }
-
-
-                            }
-                            @Override
-                            public void onError(Throwable error) {
-                                Log.e("CALLEJERO",error.getMessage());
-                            }
-                        });
+                        Toast.makeText(AddressSearchActivity.this,"Buscando dirección ...", Toast.LENGTH_SHORT).show();
+                        normalizePlaceByID(address.getIdPlaceInstance());
                     }else {
                         if(address.isStreet()){
                             searchView.setQuery(address.getStreetName() + " ", false);
@@ -300,6 +222,9 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
             }
         });
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -403,5 +328,84 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
         error.setVisibility(View.VISIBLE);
         error.setText(R.string.search_network_error);
         list.setVisibility(View.GONE);
+    }
+
+    private void normalizePlaceByID(String idPlaces) {
+        CallejeroManager.getInstance().loadPlacesObjectContent(idPlaces, new LocationCallbackPlacesObjectCntent() {
+            @Override
+            public void onSuccess(PlacesObjectContent placesTwo) {
+                direccion = placesTwo.getDireccionNormalizada();
+
+                String point =  placesTwo.getUbicacion().getControide();
+
+                final Double pointX = GcbaUtils.parseX(point);
+                final Double pointY = GcbaUtils.parseY(point);
+                AddressLocation addressLocation = new AddressLocation();
+                addressLocation.setX(pointX);
+                addressLocation.setY(pointY);
+
+                if (direccion == null ) direccion ="" ;
+
+                if (direccion.isEmpty()){
+                    normalizeAndDeliver(addressLocation);
+                }else {
+                    normalizeAndDeliver(direccion);
+                }
+
+
+            }
+            @Override
+            public void onError(Throwable error) {
+                Log.e("CALLEJERO",error.getMessage());
+            }
+        });
+    }
+
+    private void normalizeAndDeliver(final String direccion) {
+        CallejeroManager.getInstance().normalizeQuery(direccion, true, new SearchCallback() {
+            @Override
+            public void onSuccess(NormalizeResponse normalize) {
+
+                if (normalize.getAddressList().size()>0){
+                    StandardizedAddress address = normalize.getAddressList().get(0);
+                    address.setStreetCode(address.getStreetCode());
+                    address.setNumber(address.getNumber());
+                    address.setStreetName(address.getStreetName());
+                    address.setName(address.getName());
+                    address.setStreetCornerName(address.getStreetCornerName());
+                    address.setType(address.getType());
+                    address.setCityCode(address.getCityCode());
+                    //    address.setLocation(addressLocation);
+
+                    searchView.setQuery(address.getName(), false);
+                    hideKeyboard();
+                    deliverResult(address);
+                }else{
+                    Log.w("CALLEJERO","No hay resultados para la normalizacion por STRING ");
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                Log.e("CALLEJERO",error.getMessage());
+            }
+        });
+    }
+
+    private void normalizeAndDeliver(AddressLocation addressLocation) {
+        CallejeroManager.getInstance().loadAddressLatLong(addressLocation, new LocationCallBack() {
+            @Override
+            public void onSuccess(StandardizedAddress address) {
+                searchView.setQuery(address.getName(), false);
+                hideKeyboard();
+                deliverResult(address);
+            }
+
+            @Override
+            public void onError(Throwable error) {
+                Log.e("CALLEJERO",error.getMessage());
+            }
+        });
     }
 }

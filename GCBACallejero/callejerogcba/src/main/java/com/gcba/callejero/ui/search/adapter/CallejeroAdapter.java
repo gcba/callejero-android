@@ -107,11 +107,10 @@ public class CallejeroAdapter extends BaseAdapter {
         ImageView imageView = (ImageView) convertView.findViewById(R.id.ImageView);
         if (address.isPlace()){
             imageView.setImageResource(R.drawable.bandera1);
-        }
-
-        if (address.isStreet()){
+        }else{
             imageView.setImageResource(R.drawable.direccion1);
         }
+
         TextView resultName = (TextView) convertView.findViewById(R.id.search_result_name);
         resultName.setText(highlightMatches(address.getName()));
 

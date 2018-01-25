@@ -3,6 +3,7 @@ package com.gcba.callejero.ui.search;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.gcba.callejero.CallejeroCTE;
 import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.SearchCallback;
 import com.gcba.callejero.cache.CacheManager;
@@ -112,8 +113,8 @@ public class AddressSearchPresenter {
                         List<StandardizedAddress> addressListFromPlace = new ArrayList<>();
                         for (PlaceInstancias object: instancias) {
                             StandardizedAddress adress = new StandardizedAddress();
-                            adress.setName("P - " + object.getNombre() /*+ object.getId()*/);
-                            adress.setType("PLACE");
+                            adress.setName(object.getNombre());
+                            adress.setType(CallejeroCTE.PLACE);
                             adress.setIdPlaceInstance(object.getId());
                             addressListFromPlace.add(adress);
                         }

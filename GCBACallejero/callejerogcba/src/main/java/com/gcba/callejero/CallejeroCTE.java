@@ -18,5 +18,7 @@ public class CallejeroCTE {
     public static final String SHOW_LABEL = "_SHOW_LABEL_";
     public static final String SHOW_PLACES = "_SHOW_PLACES_" ;
 
+    public static final String PLACE = "_PLACE_" ;
+
 
 }

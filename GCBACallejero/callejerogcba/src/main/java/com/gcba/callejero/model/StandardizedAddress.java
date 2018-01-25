@@ -3,6 +3,7 @@ package com.gcba.callejero.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.gcba.callejero.CallejeroCTE;
 import com.google.gson.annotations.SerializedName;
 
 /**
@@ -139,7 +140,7 @@ public class StandardizedAddress implements Parcelable{
     }
 
     public boolean isPlace(){
-        return type.equals("PLACE");
+        return type.equalsIgnoreCase(CallejeroCTE.PLACE);
     }
 
 
