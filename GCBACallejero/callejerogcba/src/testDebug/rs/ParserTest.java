@@ -2,7 +2,7 @@
  * Created by gcbamobile on 18/01/18.
  */
 
-import com.gcba.callejero.ui.CallejeroUtils;
+import com.gcba.callejero.ui.GcbaUtils;
 
 
 import org.junit.Test;
@@ -22,8 +22,8 @@ public class ParserTest {
         Double xExpected = new Double("-58.3695565348919203") ;
         Double yExpected = new Double("-34.6267443756208877") ;
 
-        assertTrue("el X coincide", xExpected.equals(CallejeroUtils.parseX(point)));
-        assertTrue("el Y coincide", yExpected.equals(CallejeroUtils.parseY(point)));
+        assertTrue("el X coincide", xExpected.equals(GcbaUtils.parseX(point)));
+        assertTrue("el Y coincide", yExpected.equals(GcbaUtils.parseY(point)));
 
     }
 

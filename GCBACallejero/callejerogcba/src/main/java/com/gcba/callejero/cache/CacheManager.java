@@ -2,9 +2,11 @@ package com.gcba.callejero.cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.gcba.callejero.model.AddressLocation;
 import com.gcba.callejero.model.StandardizedAddress;
+import com.gcba.callejero.ui.GcbaUtils;
 import com.jayway.jsonpath.Configuration;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.Option;
@@ -321,7 +323,8 @@ public class CacheManager {
 
         try {
             return parseAddress(addresses.getJSONObject(0));
-        } catch (JSONException e) {
+        } catch (Exception e) {
+            Log.d("ERROR",addresses.toString());
             e.printStackTrace();
         }
 
@@ -387,13 +390,14 @@ public class CacheManager {
             StandardizedAddress address = new StandardizedAddress();
 
 
-            address.setType(jAddress.has(TYPE_ATTR) ? jAddress.getString(TYPE_ATTR) : "calle_altura");
-            address.setName(jAddress.getString(ADDRESS_NAME_ATTR));
-            address.setNumber(jAddress.getInt(STREET_NUMBER_ATTR));
-            address.setStreetName(jAddress.getString(STREET_NAME_ATTR));
-            address.setStreetCornerName(jAddress.getString(STREET_CORNER_NAME_ATTR));
-            address.setStreetCode(jAddress.getInt(STREET_CODE_ATTR));
-            address.setCityCode(jAddress.has(COD_PARTIDO) ? jAddress.getString(COD_PARTIDO) : null);
+           // address.setType(jAddress.has(TYPE_ATTR) ? GcbaUtils.getString(jAddress,TYPE_ATTR) : "calle_altura");
+            address.setType(GcbaUtils.getString(jAddress,TYPE_ATTR));
+            address.setName(GcbaUtils.getString(jAddress,ADDRESS_NAME_ATTR));
+            address.setNumber(GcbaUtils.getInt(jAddress,STREET_NUMBER_ATTR));
+            address.setStreetName( GcbaUtils.getString(jAddress,STREET_NAME_ATTR));
+            address.setStreetCornerName(GcbaUtils.getString(jAddress,STREET_CORNER_NAME_ATTR));
+            address.setStreetCode(GcbaUtils.getInt(jAddress,STREET_CODE_ATTR));
+            address.setCityCode(GcbaUtils.getString(jAddress,COD_PARTIDO) );
 
 
             AddressLocation location = new AddressLocation();
@@ -411,6 +415,7 @@ public class CacheManager {
 
 
     }
+
 
     private void saveSearchsJson(String json){
 

@@ -32,7 +32,7 @@ import com.gcba.callejero.model.NormalizeResponse;
 import com.gcba.callejero.model.Places.PlacesLocations;
 import com.gcba.callejero.model.Places.PlacesObjectContent;
 import com.gcba.callejero.model.StandardizedAddress;
-import com.gcba.callejero.ui.CallejeroUtils;
+import com.gcba.callejero.ui.GcbaUtils;
 import com.gcba.callejero.ui.CallejeroView;
 import com.gcba.callejero.ui.LocationCallbackPlacesObjectCntent;
 import com.gcba.callejero.ui.search.adapter.CallejeroAdapter;
@@ -204,8 +204,8 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
 
                                 String point =  placesTwo.getUbicacion().getControide();
 
-                                final Double pointX = CallejeroUtils.parseX(point);
-                                final Double pointY = CallejeroUtils.parseY(point);
+                                final Double pointX = GcbaUtils.parseX(point);
+                                final Double pointY = GcbaUtils.parseY(point);
                                 AddressLocation addressLocation = new AddressLocation();
                                 addressLocation.setX(pointX);
                                 addressLocation.setY(pointY);
