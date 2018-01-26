@@ -72,6 +72,16 @@
             android:gravity="center"
             android:visibility="gone"/>
 
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/nroVersion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="160dp"
+        android:textColor="#FFFFFF"
+        android:text="V 1.1"/>
 
 </LinearLayout>
