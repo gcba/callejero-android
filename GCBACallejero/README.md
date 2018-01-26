@@ -7,6 +7,8 @@ Es un proyecto de ejemplo que tiene el modulo.
 
 * v1.2 18/12/17 (en progreso)
 
+    *Fix : Implementacion de places
+
    * Fix : Corregido que al seleccionar una de las ultimas búsquedas sugeridas traiga el campo de "CABA". (https://trello.com/c/xXcYtnXA)
 
    * Fix : minima cantidad de caracteres para que te muestre las sugerencia de busqueda. (https://trello.com/c/hFQyqF6i)
