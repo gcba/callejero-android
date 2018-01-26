@@ -4,10 +4,12 @@ Es un proyecto de ejemplo que tiene el modulo.
 ## Changelog
 
 
+* v1.3 (en progreso)
 
-* v1.2 18/12/17 (en progreso)
 
-    *Fix : Implementacion de places
+* v1.2 26/01/18
+
+   * NuevaFuncionalidad : Ahora con callejero se puede configurar para que busque lugares.
 
    * Fix : Corregido que al seleccionar una de las ultimas búsquedas sugeridas traiga el campo de "CABA". (https://trello.com/c/xXcYtnXA)
 
