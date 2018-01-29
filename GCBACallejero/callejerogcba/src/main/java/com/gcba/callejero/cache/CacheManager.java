@@ -264,6 +264,7 @@ public class CacheManager {
             return jAddress;
         } catch (JSONException e) {
             e.printStackTrace();
+            e.printStackTrace();
         }
 
         return null;
