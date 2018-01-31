@@ -6,8 +6,13 @@ Es un proyecto de ejemplo que tiene el modulo.
 
 * v1.3 (en progreso)
 
+	* 
 
-* v1.2 29/01/18
+* v1.2.2 31/01/18
+
+	* Se Descomenta método público loadAddressLaqtLongFromCABA para poder usar.
+
+* v1.2   29/01/18
 
    * Modificacado versionName paos de ser V1.1 a V1.2
 
