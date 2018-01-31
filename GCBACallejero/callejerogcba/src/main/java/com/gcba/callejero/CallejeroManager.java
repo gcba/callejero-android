@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.SparseArray;
 
 import com.gcba.callejero.api.ApiManager;
+import com.gcba.callejero.model.AddressLatLong;
 import com.gcba.callejero.model.AddressLocation;
 import com.gcba.callejero.model.NormalizeResponse;
 import com.gcba.callejero.model.Places.Places;
@@ -52,7 +53,7 @@ public class CallejeroManager {
      * @param locationCallBack
      **
      */
-   /* public void loadAddressLaqtLongFromCABA(final AddressLocation location, final LocationCallBack locationCallBack){
+    public void loadAddressLaqtLongFromCABA(final AddressLocation location, final LocationCallBack locationCallBack){
 
         api.addressWithLatLong(location)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -82,14 +83,14 @@ public class CallejeroManager {
                         address.setLocation(location);
                         address.setName(addressLatLong.getDoor() + ", CABA");
                         address.setStreetName(String.valueOf(sb));
-                        address.setType("calle_altura");
+                        address.setType(CallejeroCTE.CALLE_ALTURA);
                         address.setStreetCornerName(addressLatLong.getCorner());
                         address.setCityCode("CABA");
 
                         locationCallBack.onSuccess(address);
                     }
                 });
-    }*/
+    }
 
     /**
      * Devuelve un objeto address en el que la direccion es siempre la esquina para capital y provincia.

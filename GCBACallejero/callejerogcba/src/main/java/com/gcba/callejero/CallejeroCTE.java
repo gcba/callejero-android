@@ -20,5 +20,13 @@ public class CallejeroCTE {
 
     public static final String PLACE = "_PLACE_" ;
 
+    //Convención USIG
+    public static final String CALLE_ALTURA = "calle_altura" ;
+    public static final String CALLE_CALLE = "calle_y_calle" ;
+    public static final String CALLE_ALTURA_CALLE_CALLE = "calle_altura_calle_y_calle" ;
+
+
+
+
 
 }
