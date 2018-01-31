@@ -75,13 +75,22 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/nroVersion"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="450dp"
-        android:layout_marginLeft="160dp"
-        android:textColor="#FFFFFF"
-        android:text="V 1.1"/>
+        android:layout_gravity="bottom"
+        >
+
+        <TextView
+            android:id="@+id/nroVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:text=""
+            android:layout_marginLeft="160dp"
+            android:layout_gravity="bottom"
+            />
+
+    </FrameLayout>
 
 </LinearLayout>

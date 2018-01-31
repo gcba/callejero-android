@@ -7,7 +7,9 @@ Es un proyecto de ejemplo que tiene el modulo.
 * v1.3 (en progreso)
 
 
-* v1.2 26/01/18
+* v1.2 29/01/18
+
+   * Modificacado versionName paos de ser V1.1 a V1.2
 
    * NuevaFuncionalidad : Ahora con callejero se puede configurar para que busque lugares.
 

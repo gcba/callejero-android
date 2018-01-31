@@ -17,12 +17,14 @@ import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.gcba.callejero.BuildConfig;
 import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.LocationCallBack;
 import com.gcba.callejero.R;
@@ -61,6 +63,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
     private boolean showLabel;
     private String direccion;
     private LinearLayout rootLayout;
+    private TextView nroVersion;
     private String x;
     private String y;
     PlacesLocations placesLocations;
@@ -161,10 +164,13 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
     private void initControls(){
 
         rootLayout = (LinearLayout) findViewById(R.id.root_layout);
+        nroVersion = (TextView) findViewById(R.id.nroVersion);
 
         searchView = (SearchView) findViewById(R.id.search_address_view);
         searchView.setIconifiedByDefault(false);
         searchView.requestFocus();
+
+        nroVersion.setText("V"+BuildConfig.VERSION_NAME);
 
         RxSearchView.queryTextChanges(searchView)
                 .debounce(400, TimeUnit.MILLISECONDS)
