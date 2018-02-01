@@ -36,8 +36,8 @@ public class StandardizedAddress implements Parcelable{
     @SerializedName("coordenadas")
     private AddressLocation location;
 
-    @SerializedName("idPlaceInstance")
-    private String idPlaceInstance;
+    @SerializedName("placeName")
+    private String placeName;
 
     @Override
     public String toString() {
@@ -50,7 +50,7 @@ public class StandardizedAddress implements Parcelable{
                 ", streetCornerName='" + streetCornerName + '\'' +
                 ", type='" + type + '\'' +
                 ", location=" + location +
-                ", idPlaceInstance='" + idPlaceInstance + '\'' +
+                ", placeName='" + placeName + '\'' +
                 '}';
     }
 
@@ -65,7 +65,7 @@ public class StandardizedAddress implements Parcelable{
         streetName = in.readString();
         streetCornerName = in.readString();
         type = in.readString();
-        idPlaceInstance = in.readString();
+        placeName = in.readString();
         location = in.readParcelable(AddressLocation.class.getClassLoader());
 
     }
@@ -136,16 +136,20 @@ public class StandardizedAddress implements Parcelable{
     }
 
     public boolean isStreet(){
-        return type.equals("calle");
+        return  type.equalsIgnoreCase(CallejeroCTE.CALLE);
     }
 
     public boolean isPlace(){
-        return type.equalsIgnoreCase(CallejeroCTE.PLACE);
+        return placeName != null && ! placeName.isEmpty();
     }
 
+    public String getPlaceName() {
+        return placeName;
+    }
 
-
-
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
 
     @Override
     public int describeContents() {
@@ -161,17 +165,9 @@ public class StandardizedAddress implements Parcelable{
         dest.writeString(streetName);
         dest.writeString(streetCornerName);
         dest.writeString(type);
-        dest.writeString(idPlaceInstance);
+        dest.writeString(placeName);
         dest.writeParcelable(location, flags);
 
-    }
-
-    public String getIdPlaceInstance() {
-        return idPlaceInstance;
-    }
-
-    public void setIdPlaceInstance(String idPlaceInstance) {
-        this.idPlaceInstance = idPlaceInstance;
     }
 
     public static final Creator<StandardizedAddress> CREATOR = new Creator<StandardizedAddress>() {

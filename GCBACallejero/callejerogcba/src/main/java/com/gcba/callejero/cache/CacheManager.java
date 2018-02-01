@@ -56,7 +56,7 @@ public class CacheManager {
 
     static final String TYPE_ATTR = "type";
 
-    static final String IDPLACES = "idPlace";
+    static final String PLACE_NAME = "place_name";
 
     static final String X_ATTR = "x";
 
@@ -250,7 +250,7 @@ public class CacheManager {
             jAddress.put(ADDRESS_NAME_ATTR, address.getName());
             jAddress.put(STREET_CORNER_NAME_ATTR, address.getStreetCornerName());
             jAddress.put(TYPE_ATTR, address.getType());
-            jAddress.put(IDPLACES, address.getIdPlaceInstance());
+            jAddress.put(PLACE_NAME, address.getPlaceName());
             jAddress.put(COD_PARTIDO, address.getCityCode());
 
 
@@ -397,6 +397,7 @@ public class CacheManager {
         address.setStreetCornerName(GcbaUtils.getString(jAddress,STREET_CORNER_NAME_ATTR));
         address.setStreetCode(GcbaUtils.getInt(jAddress,STREET_CODE_ATTR));
         address.setCityCode(GcbaUtils.getString(jAddress,COD_PARTIDO) );
+        address.setPlaceName(GcbaUtils.getString(jAddress,PLACE_NAME) );
 
         AddressLocation location = new AddressLocation();
         location.setX(GcbaUtils.getDouble(jAddress,X_ATTR));

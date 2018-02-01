@@ -2,6 +2,7 @@ package com.gcba.callejero.ui.search;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.gcba.callejero.CallejeroCTE;
 import com.gcba.callejero.CallejeroManager;
@@ -11,8 +12,10 @@ import com.gcba.callejero.model.NormalizeResponse;
 import com.gcba.callejero.model.Places.PlaceClasesEncontradas;
 import com.gcba.callejero.model.Places.PlaceInstancias;
 import com.gcba.callejero.model.Places.Places;
+import com.gcba.callejero.model.Places.PlacesObjectContent;
 import com.gcba.callejero.model.StandardizedAddress;
 import com.gcba.callejero.ui.LocationCallBackPlaces;
+import com.gcba.callejero.ui.LocationCallbackPlacesObjectCntent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +85,7 @@ public class AddressSearchPresenter {
 
         searchNormalizeAdress(query, onlyFromCABA);
 
-        searchPlaces(query, showPlaces, charSequence);
+        if (charSequence.length() >= 4 && showPlaces) searchPlaces(query, showPlaces, charSequence);
 
     }
 
@@ -92,44 +95,64 @@ public class AddressSearchPresenter {
             cacheManager.saveAddress(address);
         }
     }
-
+    /** Busca lugares en epok y los normaliza */
     private void searchPlaces(final String query, boolean showPlaces, CharSequence charSequence) {
-        if (charSequence.length() >= 4){
 
-            if (showPlaces){
-                CallejeroManager.getInstance().loadPlaces(query, new LocationCallBackPlaces() {
-                    @Override
-                    public void onSuccess(Places places) {
+        CallejeroManager.getInstance().loadPlaces(query, new LocationCallBackPlaces() {
+            @Override
+            public void onSuccess(Places places) {
 
-                        List<StandardizedAddress> addressListFromPlace = placesToStandardizedAddresses(places);
+                for (PlaceInstancias instance: places.getInstancias()) {
+                    Log.i("CALLEJERO " ,"place encontrado " + instance.getNombre());
+                    intanceToStandarizedAddress(instance.getNombre(),instance);
+                }
 
-                        addResult(query,addressListFromPlace);
-
-                    }
-
-                    @NonNull
-                    private List<StandardizedAddress> placesToStandardizedAddresses(Places places) {
-                        ArrayList<PlaceInstancias> instancias = places.getInstancias();
-                        List<StandardizedAddress> addressListFromPlace = new ArrayList<>();
-                        for (PlaceInstancias object: instancias) {
-                            StandardizedAddress adress = new StandardizedAddress();
-                            adress.setName(object.getNombre());
-                            adress.setType(CallejeroCTE.PLACE);
-                            adress.setIdPlaceInstance(object.getId());
-                            addressListFromPlace.add(adress);
-                        }
-                        return addressListFromPlace;
-                    }
-
-                    @Override
-                    public void onError(Throwable error) {
-
-                    }
-                });
             }
 
-        }
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
     }
+    /**Busca instancias de lugar , si tiene una direccion la normaliza y agrega como standarized address , sino la descarta **/
+    private void intanceToStandarizedAddress(final String placeName, PlaceInstancias instance) {
+
+        CallejeroManager.getInstance().loadPlacesObjectContent(instance.getId(), new LocationCallbackPlacesObjectCntent() {
+            @Override
+            public void onSuccess(final PlacesObjectContent objectContent) {
+
+                if (!objectContent.getDireccionNormalizada().isEmpty()) {
+                    CallejeroManager.getInstance().normalizeQuery(objectContent.getDireccionNormalizada(), Boolean.FALSE, new SearchCallback() {
+                        @Override
+                        public void onSuccess(NormalizeResponse normalize) {
+                            if (normalize.getAddressList().size() > 0){
+                                StandardizedAddress sa = normalize.getAddressList().get(0);
+                                sa.setPlaceName(placeName);
+                                sa.setName(placeName);
+                                Log.i("CALLEJERO" , "resultado de la normalizacion " + sa.getStreetName() );
+                                addResult(objectContent.getDireccionNormalizada(), sa);
+                            }
+
+                        }
+
+                        @Override
+                        public void onError(Throwable error) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onError(Throwable error) {
+
+            }
+        });
+
+    }
+
 
     private void searchNormalizeAdress(final String query, boolean onlyFromCABA) {
         CallejeroManager.getInstance().normalizeQuery(query, onlyFromCABA, new SearchCallback() {
@@ -160,6 +183,11 @@ public class AddressSearchPresenter {
 
     private synchronized void addResult(final String query,List<StandardizedAddress> partialList){
         addressList.addAll(partialList);
+        view.onResultSuccess(query, addressList);
+    }
+
+    private synchronized void addResult(final String query,StandardizedAddress sa){
+        addressList.add(sa);
         view.onResultSuccess(query, addressList);
     }
 }

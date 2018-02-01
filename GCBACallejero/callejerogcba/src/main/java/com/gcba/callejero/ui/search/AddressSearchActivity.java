@@ -191,6 +191,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                 });
 
         list = (ListView) findViewById(R.id.search_address_list);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
@@ -199,17 +200,11 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
                 }else {
                     StandardizedAddress address = (StandardizedAddress) list.getItemAtPosition(position);
 
-                    if (address.isPlace()){
-                        Toast.makeText(AddressSearchActivity.this,"Buscando dirección ...", Toast.LENGTH_SHORT).show();
-                        normalizePlaceByID(address.getIdPlaceInstance());
+                    if(address.isStreet()){
+                        searchView.setQuery(address.getStreetName() + " ", false);
                     }else {
-                        if(address.isStreet()){
-                            searchView.setQuery(address.getStreetName() + " ", false);
-                        }else {
-                            hideKeyboard();
-                            deliverResult(address);
-                        }
-
+                        hideKeyboard();
+                        deliverResult(address);
                     }
                 }
             }
@@ -336,82 +331,4 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
         list.setVisibility(View.GONE);
     }
 
-    private void normalizePlaceByID(String idPlaces) {
-        CallejeroManager.getInstance().loadPlacesObjectContent(idPlaces, new LocationCallbackPlacesObjectCntent() {
-            @Override
-            public void onSuccess(PlacesObjectContent placesTwo) {
-                direccion = placesTwo.getDireccionNormalizada();
-
-                String point =  placesTwo.getUbicacion().getControide();
-
-                final Double pointX = GcbaUtils.parseX(point);
-                final Double pointY = GcbaUtils.parseY(point);
-                AddressLocation addressLocation = new AddressLocation();
-                addressLocation.setX(pointX);
-                addressLocation.setY(pointY);
-
-                if (direccion == null ) direccion ="" ;
-
-                if (direccion.isEmpty()){
-                    normalizeAndDeliver(addressLocation);
-                }else {
-                    normalizeAndDeliver(direccion);
-                }
-
-
-            }
-            @Override
-            public void onError(Throwable error) {
-                Log.e("CALLEJERO",error.getMessage());
-            }
-        });
-    }
-
-    private void normalizeAndDeliver(final String direccion) {
-        CallejeroManager.getInstance().normalizeQuery(direccion, true, new SearchCallback() {
-            @Override
-            public void onSuccess(NormalizeResponse normalize) {
-
-                if (normalize.getAddressList().size()>0){
-                    StandardizedAddress address = normalize.getAddressList().get(0);
-                    address.setStreetCode(address.getStreetCode());
-                    address.setNumber(address.getNumber());
-                    address.setStreetName(address.getStreetName());
-                    address.setName(address.getName());
-                    address.setStreetCornerName(address.getStreetCornerName());
-                    address.setType(address.getType());
-                    address.setCityCode(address.getCityCode());
-                    //    address.setLocation(addressLocation);
-
-                    searchView.setQuery(address.getName(), false);
-                    hideKeyboard();
-                    deliverResult(address);
-                }else{
-                    Log.w("CALLEJERO","No hay resultados para la normalizacion por STRING ");
-                }
-
-            }
-
-            @Override
-            public void onError(Throwable error) {
-                Log.e("CALLEJERO",error.getMessage());
-            }
-        });
-    }
-
-    private void normalizeAndDeliver(AddressLocation addressLocation) {
-        CallejeroManager.getInstance().loadAddressLatLong(addressLocation, new LocationCallBack() {
-            @Override
-            public void onSuccess(StandardizedAddress address) {
-                searchView.setQuery(address.getName(), false);
-                hideKeyboard();
-                deliverResult(address);
-            }
-
-            @Override
-            public void onError(Throwable error) {
-                Log.e("CALLEJERO",error.getMessage());
-            }
-        });
-    }
 }

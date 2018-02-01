@@ -1,12 +1,17 @@
 # PLUGIN callejero .
-Es un proyecto de ejemplo que tiene el modulo.
+Es un proyecto de ejemplo que tiene el **modulo** de callejero.
+
+## install
+Para poder usar la dependencia se debe exportar el modulo **calljerogcba** como EAR.
+
 
 ## Changelog
 
+* v1.X (en progreso)
 
-* v1.3 (en progreso)
+* v1.2.3
 
-	* 
+	* FIX : Rompe si se elije un lugar que no tiene dirección normalizada.
 
 * v1.2.2 31/01/18
 
