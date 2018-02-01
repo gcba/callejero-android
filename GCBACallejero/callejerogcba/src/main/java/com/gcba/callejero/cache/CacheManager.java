@@ -386,35 +386,24 @@ public class CacheManager {
 
     private StandardizedAddress parseAddress(JSONObject jAddress){
 
-        try {
-
-            StandardizedAddress address = new StandardizedAddress();
+        StandardizedAddress address = new StandardizedAddress();
 
 
-           // address.setType(jAddress.has(TYPE_ATTR) ? GcbaUtils.getString(jAddress,TYPE_ATTR) : "calle_altura");
-            address.setType(GcbaUtils.getString(jAddress,TYPE_ATTR));
-            address.setName(GcbaUtils.getString(jAddress,ADDRESS_NAME_ATTR));
-            address.setNumber(GcbaUtils.getInt(jAddress,STREET_NUMBER_ATTR));
-            address.setStreetName( GcbaUtils.getString(jAddress,STREET_NAME_ATTR));
-            address.setStreetCornerName(GcbaUtils.getString(jAddress,STREET_CORNER_NAME_ATTR));
-            address.setStreetCode(GcbaUtils.getInt(jAddress,STREET_CODE_ATTR));
-            address.setCityCode(GcbaUtils.getString(jAddress,COD_PARTIDO) );
+        // address.setType(jAddress.has(TYPE_ATTR) ? GcbaUtils.getString(jAddress,TYPE_ATTR) : "calle_altura");
+        address.setType(GcbaUtils.getString(jAddress,TYPE_ATTR));
+        address.setName(GcbaUtils.getString(jAddress,ADDRESS_NAME_ATTR));
+        address.setNumber(GcbaUtils.getInt(jAddress,STREET_NUMBER_ATTR));
+        address.setStreetName( GcbaUtils.getString(jAddress,STREET_NAME_ATTR));
+        address.setStreetCornerName(GcbaUtils.getString(jAddress,STREET_CORNER_NAME_ATTR));
+        address.setStreetCode(GcbaUtils.getInt(jAddress,STREET_CODE_ATTR));
+        address.setCityCode(GcbaUtils.getString(jAddress,COD_PARTIDO) );
 
+        AddressLocation location = new AddressLocation();
+        location.setX(GcbaUtils.getDouble(jAddress,X_ATTR));
+        location.setY(GcbaUtils.getDouble(jAddress,Y_ATTR));
+        address.setLocation(location);
 
-            AddressLocation location = new AddressLocation();
-
-            location.setX(jAddress.getDouble(X_ATTR));
-            location.setY(jAddress.getDouble(Y_ATTR));
-
-            address.setLocation(location);
-
-            return address;
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-
+        return address;
     }
 
 

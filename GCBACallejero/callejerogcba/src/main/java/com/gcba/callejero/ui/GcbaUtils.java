@@ -57,4 +57,16 @@ public class GcbaUtils {
         return null;
     }
 
+    static public Double getDouble(JSONObject json,String key){
+        try {
+            if (json.has(key))
+                return  json.getDouble(key);
+            else
+                Log.w("parser","en el json no se encontro Key " + key);
+
+        } catch (JSONException e) {
+            Log.w("parser", "fallo al buscar Key " + key );
+        }
+        return new Double(0);
+    }
 }
