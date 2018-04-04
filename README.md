@@ -35,14 +35,14 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 #### Carga mediante GPS
 
-Para habilitar un botón que cargue la dirección con la ubicación del dispositivo, llamar al método `enabledLocation()`.
+Para habilitar un botón que cargue la dirección con la ubicación del dispositivo, llamar al método `enabledLocation`.
 
 ```java
 callejeroView = (CallejeroView) findViewById(R.id.callejero);
 callejeroView.enabledLocation();
 ```
 
-Para poder usar este método primero hay que pedir los permisos de ubicación.
+Si se usa este método es necesario pedir los permisos de ubicación.
 
 ```java
 private void allowCallejeroLocation() {
@@ -242,7 +242,7 @@ CallejeroManager.getInstance().startSearch(activity, options, requestCode, new S
 });
 ```
 
-Si se usa este método, es necesario sobreescribir el método `onActivityResult` de la activity desde donde se lo esté llamando (para poder recibir el resultado de búsqueda).
+Si se usa este método es necesario sobreescribir el método `onActivityResult` de la activity desde donde se lo esté llamando (para poder recibir el resultado de búsqueda).
 
 ```java
 @Override
