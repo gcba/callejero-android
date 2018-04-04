@@ -7,7 +7,8 @@ import com.gcba.callejero.model.NormalizeResponse;
  */
 
 public interface SearchCallback {
-    public void onSuccess(NormalizeResponse normalize);
-    public void onError(Throwable error);
+
+    void onSuccess(NormalizeResponse normalize);
+    void onError(Throwable error);
 
 }

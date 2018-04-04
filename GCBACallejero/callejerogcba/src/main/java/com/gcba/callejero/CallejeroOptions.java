@@ -11,15 +11,13 @@ public class CallejeroOptions {
     private Boolean showLabel = false;
     private Boolean showPlaces = false;
 
-
-
-
     public Boolean getShowOnlyFromCaba() {
         return showOnlyFromCaba;
     }
 
     public CallejeroOptions setShowOnlyFromCaba(Boolean showOnlyFromCaba) {
         this.showOnlyFromCaba = showOnlyFromCaba;
+
         return this;
     }
 
@@ -29,6 +27,7 @@ public class CallejeroOptions {
 
     public CallejeroOptions setShowPin(Boolean showPin) {
         this.showPin = showPin;
+
         return this;
     }
 
@@ -38,6 +37,7 @@ public class CallejeroOptions {
 
     public CallejeroOptions setShowLabel(Boolean showLabel) {
         this.showLabel = showLabel;
+
         return this;
     }
 
@@ -47,8 +47,8 @@ public class CallejeroOptions {
 
     public CallejeroOptions setShowPlaces(Boolean showPlaces) {
         this.showPlaces = showPlaces;
-            return this;}
 
-
+        return this;
+    }
 
 }

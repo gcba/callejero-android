@@ -8,7 +8,7 @@ import com.gcba.callejero.model.StandardizedAddress;
 
 public interface LocationCallBack {
 
-    public void onSuccess(StandardizedAddress address);
-    public void onError(Throwable error);
+    void onSuccess(StandardizedAddress address);
+    void onError(Throwable error);
 
 }

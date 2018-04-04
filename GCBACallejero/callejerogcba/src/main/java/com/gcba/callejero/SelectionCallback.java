@@ -12,4 +12,5 @@ public interface SelectionCallback {
     void onCancel();
     void onSelectedPin();
     void onSelectionLabel(String direction);
+
 }
