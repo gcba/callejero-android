@@ -168,7 +168,7 @@ CallejeroManager.getInstance().normalizeQuery(query, onlyFromCABA, new SearchCal
 
 ##### Sólo CABA
 
-Es posible buscar una dirección a partir de latitud y longitud, con el método `loadAddressLatLongFromCABA`. Este método recibe dos parámetros: un objeto `AddressLocation` con las coordenadas y un `LocationCallback`.
+Es posible buscar una dirección a partir de una latitud y longitud con el método `loadAddressLatLongFromCABA`. Este método recibe dos parámetros: un objeto `AddressLocation` con las coordenadas y un `LocationCallback`.
 
 ```java
 AddressLocation location = new AddressLocation();
