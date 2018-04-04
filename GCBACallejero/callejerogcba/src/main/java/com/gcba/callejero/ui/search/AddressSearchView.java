@@ -9,9 +9,11 @@ import java.util.List;
  */
 
 public interface AddressSearchView {
+
     void onStartSearch();
     void onEmptySearch();
     void onResultSuccess(String query, List<StandardizedAddress> addressList);
     void onEmptyResults();
     void onResultError();
+
 }

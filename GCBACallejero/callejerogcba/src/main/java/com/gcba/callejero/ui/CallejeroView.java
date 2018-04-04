@@ -35,24 +35,17 @@ import com.google.android.gms.tasks.OnSuccessListener;
 
 public class CallejeroView extends RelativeLayout {
 
-    static final int REQUEST_SEARCH_CODE = 1001;
-
     private CallejeroOptions callejeroOptions = new CallejeroOptions();
 
+    static final int REQUEST_SEARCH_CODE = 1001;
     private static final boolean DEFAULT_ONLY_CABA = false;
     public static final String REQUEST_ID_DATA = "_REQUEST_ID_DATA_";
 
     private SelectionCallback callback;
-
     private StandardizedAddress selectedAddress;
-
     private TextView addressTextView;
     private View divider;
     private ImageView myLocation;
-
-
-
-
     private FusedLocationProviderClient fusedLocationClient;
 
     public CallejeroView(Context context) {
@@ -65,13 +58,12 @@ public class CallejeroView extends RelativeLayout {
 
     public CallejeroView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
         init();
     }
 
     private void init() {
-
         setBackgroundResource(R.drawable.callejero_background);
-
         LayoutInflater.from(getContext()).inflate(R.layout.callejero_layout, this, true);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(getContext());
@@ -115,34 +107,29 @@ public class CallejeroView extends RelativeLayout {
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
-
                             AddressLocation addressLocation = new AddressLocation();
+
                             addressLocation.setX(location.getLongitude());
                             addressLocation.setY(location.getLatitude());
-
 
                             CallejeroManager.getInstance().loadAddressLatLong(addressLocation, new LocationCallBack() {
                                 @Override
                                 public void onSuccess(StandardizedAddress address) {
-
                                     CallejeroView.this.selectedAddress = address;
+
                                     hanldeResult(address);
                                 }
 
                                 @Override
-                                public void onError(Throwable error) {
-
-                                }
+                                public void onError(Throwable error) { }
                             });
                         }
                     }
                 });
     }
 
-
-    @RequiresPermission(allOf = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION })
-    public void enabledLocation(){
-
+    @RequiresPermission(allOf = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION})
+    public void enabledLocation() {
         RelativeLayout.LayoutParams myLocationParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         myLocationParams.addRule(ALIGN_PARENT_RIGHT);
 
@@ -150,8 +137,8 @@ public class CallejeroView extends RelativeLayout {
         myLocation.setVisibility(VISIBLE);
 
         int heigth = getResources().getDimensionPixelSize(R.dimen.callejero_height);
-
         RelativeLayout.LayoutParams dividerParams = new RelativeLayout.LayoutParams(1, heigth);
+
         dividerParams.addRule(RelativeLayout.LEFT_OF, myLocation.getId());
         dividerParams.addRule(CENTER_VERTICAL);
 
@@ -159,8 +146,8 @@ public class CallejeroView extends RelativeLayout {
         divider.setVisibility(VISIBLE);
 
         int margin = getResources().getDimensionPixelSize(R.dimen.callejero_padding);
-
         RelativeLayout.LayoutParams addressParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, heigth);
+
         addressParams.addRule(RelativeLayout.LEFT_OF, divider.getId());
         addressParams.addRule(CENTER_VERTICAL);
         addressParams.setMargins(margin, margin, margin, margin);
@@ -168,25 +155,22 @@ public class CallejeroView extends RelativeLayout {
         addressTextView.setLayoutParams(addressParams);
     }
 
-    private void goSearchScreen(){
-
+    private void goSearchScreen() {
         Activity activity = null;
 
-        if(getContext() instanceof Activity) {
+        if (getContext() instanceof Activity) {
             activity = (Activity) getContext();
-        }else if(getContext() instanceof ContextThemeWrapper){
+        } else if (getContext() instanceof ContextThemeWrapper) {
             activity = (Activity) ((ContextThemeWrapper) getContext()).getBaseContext();
         }
 
-        if(activity != null)
-            CallejeroManager.getInstance().startSearch(activity,callejeroOptions, getId(), callback);
+        if (activity != null) CallejeroManager.getInstance().startSearch(activity, callejeroOptions, getId(), callback);
     }
 
-
-    private void hanldeResult(StandardizedAddress address){
+    private void hanldeResult(StandardizedAddress address) {
         addressTextView.setText(address.getName());
 
-        if(callback != null){
+        if (callback != null) {
             callback.onAddressSelection(address);
         }
     }
@@ -195,44 +179,42 @@ public class CallejeroView extends RelativeLayout {
         return selectedAddress;
     }
 
-    public void setOptions(CallejeroOptions optionsParams){
+    public void setOptions(CallejeroOptions optionsParams) {
         this.callejeroOptions = optionsParams;
     }
 
     public void setSelectedAddress(String name) {
         this.selectedAddress = new StandardizedAddress();
+
         this.selectedAddress.setName(name);
         hanldeResult(selectedAddress);
     }
 
     public void setSelectedAddress(StandardizedAddress selectedAddress) {
         this.selectedAddress = selectedAddress;
+
         hanldeResult(selectedAddress);
     }
 
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         setEnabled(true);
 
         int requestId = data.getIntExtra(CallejeroView.REQUEST_ID_DATA, 0);
 
-        if(requestId != getId())
-            return;
+        if (requestId != getId()) return;
 
         CallejeroManager.getInstance().onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode != REQUEST_SEARCH_CODE || resultCode != Activity.RESULT_OK)
-            return;
-
-        if(data.getIntExtra(REQUEST_ID_DATA, 0) != getId())
-            return;
+        if (requestCode != REQUEST_SEARCH_CODE || resultCode != Activity.RESULT_OK) return;
+        if (data.getIntExtra(REQUEST_ID_DATA, 0) != getId()) return;
 
         selectedAddress = data.getParcelableExtra(CallejeroCTE.STANDARDIZED_ADDRESS_DATA);
+
         hanldeResult(selectedAddress);
     }
 
     public void setSelectionCallback(SelectionCallback callback) {
         this.callback = callback;
     }
+
 }
