@@ -20,6 +20,7 @@ public class Doors {
 
     public Doors setStreetName(String streetName) {
         this.streetName = streetName;
+
         return this;
     }
 
@@ -29,6 +30,7 @@ public class Doors {
 
     public Doors setStreetNumber(Integer streetNumber) {
         this.streetNumber = streetNumber;
+
         return this;
     }
 

@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by ignacio on 08/06/17.
  */
 
-public class StandardizedAddress implements Parcelable{
+public class StandardizedAddress implements Parcelable {
 
     @SerializedName("altura")
     private int number;
@@ -54,8 +54,7 @@ public class StandardizedAddress implements Parcelable{
                 '}';
     }
 
-
-    public StandardizedAddress(){}
+    public StandardizedAddress() { }
 
     protected StandardizedAddress(Parcel in) {
         number = in.readInt();
@@ -67,9 +66,7 @@ public class StandardizedAddress implements Parcelable{
         type = in.readString();
         placeName = in.readString();
         location = in.readParcelable(AddressLocation.class.getClassLoader());
-
     }
-
 
     public int getNumber() {
         return number;
@@ -135,12 +132,12 @@ public class StandardizedAddress implements Parcelable{
         this.location = location;
     }
 
-    public boolean isStreet(){
-        return  type.equalsIgnoreCase(CallejeroCTE.CALLE);
+    public boolean isStreet() {
+        return type.equalsIgnoreCase(CallejeroCTE.CALLE);
     }
 
-    public boolean isPlace(){
-        return placeName != null && ! placeName.isEmpty();
+    public boolean isPlace() {
+        return placeName != null && !placeName.isEmpty();
     }
 
     public String getPlaceName() {
@@ -167,7 +164,6 @@ public class StandardizedAddress implements Parcelable{
         dest.writeString(type);
         dest.writeString(placeName);
         dest.writeParcelable(location, flags);
-
     }
 
     public static final Creator<StandardizedAddress> CREATOR = new Creator<StandardizedAddress>() {
@@ -181,4 +177,5 @@ public class StandardizedAddress implements Parcelable{
             return new StandardizedAddress[size];
         }
     };
+
 }

@@ -7,13 +7,12 @@ import android.os.Parcelable;
  * Created by ignacio on 08/06/17.
  */
 
-public class AddressLocation implements Parcelable{
+public class AddressLocation implements Parcelable {
 
     private double x;
-
     private double y;
 
-    public AddressLocation(){}
+    public AddressLocation() { }
 
     protected AddressLocation(Parcel in) {
         x = in.readDouble();
@@ -66,4 +65,5 @@ public class AddressLocation implements Parcelable{
             return new AddressLocation[size];
         }
     };
+
 }

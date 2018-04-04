@@ -16,7 +16,7 @@ public class NormalizeResponse {
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({NETWORK, CACHE})
-    public @interface SOURCE {}
+    public @interface SOURCE { }
 
     public static final int NETWORK = 0;
     public static final int CACHE = 1;
@@ -26,8 +26,6 @@ public class NormalizeResponse {
     @SerializedName("direccionesNormalizadas")
     private List<StandardizedAddress> addressList;
 
-
-
     public List<StandardizedAddress> getAddressList() {
         return addressList;
     }
@@ -36,15 +34,16 @@ public class NormalizeResponse {
         this.addressList = addressList;
     }
 
-    public void setSource(@SOURCE int source){
+    public void setSource(@SOURCE int source) {
         this.source = source;
     }
 
-    public boolean fromNetwork(){
+    public boolean fromNetwork() {
         return source == NETWORK;
     }
 
-    public boolean fromCache(){
+    public boolean fromCache() {
         return source == CACHE;
     }
+
 }

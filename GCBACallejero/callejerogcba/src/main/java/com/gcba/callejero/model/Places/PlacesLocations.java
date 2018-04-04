@@ -9,18 +9,16 @@ import com.google.gson.annotations.SerializedName;
  * Created by gcbamobile on 22/12/17.
  */
 
- public class PlacesLocations implements Parcelable {
+public class PlacesLocations implements Parcelable {
 
     @SerializedName("centroide")
-    private String controide ;
+    private String controide;
 
     @SerializedName("tipo")
-    private String tipo ;
+    private String tipo;
 
     private Double x = -58.4169274781971595;
-
     private Double y = -34.5588030592561353;
-
 
     public PlacesLocations(Parcel in) {
         controide = in.readString();
@@ -63,9 +61,7 @@ import com.google.gson.annotations.SerializedName;
         return CREATOR;
     }
 
-    public PlacesLocations() {
-
-    }
+    public PlacesLocations() { }
 
     @Override
     public String toString() {
@@ -97,4 +93,5 @@ import com.google.gson.annotations.SerializedName;
         dest.writeString(controide);
         dest.writeString(tipo);
     }
+
 }

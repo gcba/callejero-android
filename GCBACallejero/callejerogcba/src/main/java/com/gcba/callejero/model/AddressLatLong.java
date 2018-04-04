@@ -41,6 +41,7 @@ public class AddressLatLong {
 
     public AddressLatLong setPlot(String plot) {
         this.plot = plot;
+
         return this;
     }
 
@@ -50,6 +51,7 @@ public class AddressLatLong {
 
     public AddressLatLong setDoor(String door) {
         this.door = door;
+
         return this;
     }
 
@@ -59,6 +61,7 @@ public class AddressLatLong {
 
     public AddressLatLong setDoorX(String doorX) {
         this.doorX = doorX;
+
         return this;
     }
 
@@ -68,6 +71,7 @@ public class AddressLatLong {
 
     public AddressLatLong setDoorY(String doorY) {
         this.doorY = doorY;
+
         return this;
     }
 
@@ -77,6 +81,7 @@ public class AddressLatLong {
 
     public AddressLatLong setStretsNumbers(String stretsNumbers) {
         this.stretsNumbers = stretsNumbers;
+
         return this;
     }
 
@@ -86,6 +91,7 @@ public class AddressLatLong {
 
     public AddressLatLong setCorner(String corner) {
         this.corner = corner;
+
         return this;
     }
 
@@ -95,6 +101,7 @@ public class AddressLatLong {
 
     public AddressLatLong setDistanceCorner(String distanceCorner) {
         this.distanceCorner = distanceCorner;
+
         return this;
     }
 
@@ -104,6 +111,7 @@ public class AddressLatLong {
 
     public AddressLatLong setStreetAndNumberPair(String streetAndNumberPair) {
         this.streetAndNumberPair = streetAndNumberPair;
+
         return this;
     }
 
@@ -113,6 +121,8 @@ public class AddressLatLong {
 
     public AddressLatLong setStreetAndNumberOdd(String streetAndNumberOdd) {
         this.streetAndNumberOdd = streetAndNumberOdd;
+
         return this;
     }
+
 }

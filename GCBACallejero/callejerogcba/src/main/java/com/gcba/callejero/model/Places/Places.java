@@ -20,11 +20,10 @@ public class Places implements Parcelable {
     private ArrayList<PlaceInstancias> instancias;
 
     @SerializedName("total")
-    private String total ;
+    private String total;
 
     @SerializedName("totalFull")
-    private String totalFull ;
-
+    private String totalFull;
 
     public Places(Parcel in) {
         total = in.readString();
@@ -102,4 +101,5 @@ public class Places implements Parcelable {
         dest.writeString(total);
         dest.writeString(totalFull);
     }
+
 }

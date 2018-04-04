@@ -48,9 +48,7 @@ public class PlacesObjectContent implements Parcelable {
     @SerializedName("id")
     private String id;
 
-    public PlacesObjectContent() {
-
-    }
+    public PlacesObjectContent() { }
 
     @Override
     public String toString() {
@@ -198,4 +196,5 @@ public class PlacesObjectContent implements Parcelable {
         dest.writeString(fechaUltimaModificacion);
         dest.writeString(id);
     }
+
 }

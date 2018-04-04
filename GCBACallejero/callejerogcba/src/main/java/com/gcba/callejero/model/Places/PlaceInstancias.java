@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by gcbamobile on 22/12/17.
  */
 
-public class PlaceInstancias  implements Parcelable {
+public class PlaceInstancias implements Parcelable {
 
     @SerializedName("headline")
     private String headline;
@@ -18,14 +18,13 @@ public class PlaceInstancias  implements Parcelable {
     private String nombre;
 
     @SerializedName("claseId")
-    private String claseId ;
+    private String claseId;
 
     @SerializedName("clase")
     private String clase;
 
     @SerializedName("id")
     private String id;
-
 
     protected PlaceInstancias(Parcel in) {
         headline = in.readString();
@@ -111,4 +110,5 @@ public class PlaceInstancias  implements Parcelable {
         dest.writeString(clase);
         dest.writeString(id);
     }
+
 }

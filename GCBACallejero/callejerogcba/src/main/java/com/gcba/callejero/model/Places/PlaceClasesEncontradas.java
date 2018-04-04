@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by gcbamobile on 22/12/17.
  */
 
-public class PlaceClasesEncontradas  implements Parcelable {
+public class PlaceClasesEncontradas implements Parcelable {
 
     @SerializedName("nombreId")
     private String nombreId;
@@ -18,7 +18,7 @@ public class PlaceClasesEncontradas  implements Parcelable {
     private String nombre;
 
     @SerializedName("total")
-    private  String total;
+    private String total;
 
     @SerializedName("id")
     private String id;
@@ -56,9 +56,7 @@ public class PlaceClasesEncontradas  implements Parcelable {
         }
     };
 
-    public PlaceClasesEncontradas() {
-
-    }
+    public PlaceClasesEncontradas() { }
 
     public String getNombreId() {
         return nombreId;
@@ -104,4 +102,5 @@ public class PlaceClasesEncontradas  implements Parcelable {
         dest.writeString(id);
         dest.writeString(nombreNorm);
     }
+
 }
