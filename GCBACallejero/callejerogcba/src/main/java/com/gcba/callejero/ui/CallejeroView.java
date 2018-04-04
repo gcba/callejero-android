@@ -117,7 +117,7 @@ public class CallejeroView extends RelativeLayout {
                                 public void onSuccess(StandardizedAddress address) {
                                     CallejeroView.this.selectedAddress = address;
 
-                                    hanldeResult(address);
+                                    handleResult(address);
                                 }
 
                                 @Override
@@ -167,7 +167,7 @@ public class CallejeroView extends RelativeLayout {
         if (activity != null) CallejeroManager.getInstance().startSearch(activity, callejeroOptions, getId(), callback);
     }
 
-    private void hanldeResult(StandardizedAddress address) {
+    private void handleResult(StandardizedAddress address) {
         addressTextView.setText(address.getName());
 
         if (callback != null) {
@@ -187,13 +187,13 @@ public class CallejeroView extends RelativeLayout {
         this.selectedAddress = new StandardizedAddress();
 
         this.selectedAddress.setName(name);
-        hanldeResult(selectedAddress);
+        handleResult(selectedAddress);
     }
 
     public void setSelectedAddress(StandardizedAddress selectedAddress) {
         this.selectedAddress = selectedAddress;
 
-        hanldeResult(selectedAddress);
+        handleResult(selectedAddress);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -210,7 +210,7 @@ public class CallejeroView extends RelativeLayout {
 
         selectedAddress = data.getParcelableExtra(CallejeroCTE.STANDARDIZED_ADDRESS_DATA);
 
-        hanldeResult(selectedAddress);
+        handleResult(selectedAddress);
     }
 
     public void setSelectionCallback(SelectionCallback callback) {

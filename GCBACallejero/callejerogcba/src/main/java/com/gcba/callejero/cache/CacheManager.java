@@ -37,8 +37,8 @@ public class CacheManager {
     static final int VERSION = 1;
     static final String PREFS_NAME = "_CALLEJERO_CACHE_";
     static final String VERSION_KEY = "_VERSION_";
-    static final String SEARCHS_KEY = "_SEARCHS_";
-    static final String SEARCHS_ATTR = "searchs";
+    static final String SEARCHES_KEY = "_SEARCHS_";
+    static final String SEARCHES_ATTR = "searchs";
     static final String STREET_CODE_ATTR = "street_code";
     static final String STREET_NUMBER_ATTR = "street_number_code";
     static final String STREET_NAME_ATTR = "street_name";
@@ -64,11 +64,11 @@ public class CacheManager {
         int currentVersion = preferences.getInt(VERSION_KEY, 0);
 
         if (currentVersion < VERSION) {
-            cleanSearchs();
+            cleanSearches();
             updateVersion();
         }
 
-        if (preferences.contains(SEARCHS_KEY)) {
+        if (preferences.contains(SEARCHES_KEY)) {
             return;
         }
 
@@ -76,8 +76,8 @@ public class CacheManager {
             JSONObject object = new JSONObject();
             JSONArray jsonArray = new JSONArray();
 
-            object.put(SEARCHS_ATTR, jsonArray);
-            saveSearchsJson(object.toString());
+            object.put(SEARCHES_ATTR, jsonArray);
+            saveSearchesJson(object.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -90,8 +90,8 @@ public class CacheManager {
         editor.apply();
     }
 
-    private void cleanSearchs() {
-        preferences.edit().remove(SEARCHS_KEY).apply();
+    private void cleanSearches() {
+        preferences.edit().remove(SEARCHES_KEY).apply();
     }
 
     private void initJsonPath() {
@@ -114,18 +114,18 @@ public class CacheManager {
     }
 
     public void saveAddress(StandardizedAddress address) {
-        JSONObject searchs = getSearchs();
+        JSONObject searches = getSearches();
 
-        if (searchs == null) return;
+        if (searches == null) return;
 
         if (findByStreetCode(address.getStreetCode()) != null) {
-            reorderAddress(searchs, address);
+            reorderAddress(searches, address);
 
             return;
         }
 
         try {
-            JSONArray results = searchs.getJSONArray(SEARCHS_ATTR);
+            JSONArray results = searches.getJSONArray(SEARCHES_ATTR);
             List<StandardizedAddress> addresses = new ArrayList<>();
 
             for (int index = 0; index < results.length(); index++) {
@@ -142,23 +142,23 @@ public class CacheManager {
 
             for (int index = 0; index < addresses.size(); index++) {
                 StandardizedAddress newAddress = addresses.get(index);
-                JSONObject search = convertAddresToJson(newAddress);
+                JSONObject search = convertAddressToJson(newAddress);
 
                 if (search != null) results.put(search);
             }
 
-            searchs.put(SEARCHS_ATTR, results);
-            saveSearchsJson(searchs.toString());
+            searches.put(SEARCHES_ATTR, results);
+            saveSearchesJson(searches.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private JSONObject getSearchs() {
-        String searchsJson = preferences.getString(SEARCHS_KEY, "");
+    private JSONObject getSearches() {
+        String searchesJson = preferences.getString(SEARCHES_KEY, "");
 
         try {
-            return new JSONObject(searchsJson);
+            return new JSONObject(searchesJson);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -166,9 +166,9 @@ public class CacheManager {
         return null;
     }
 
-    private void reorderAddress(JSONObject searchs, StandardizedAddress address) {
+    private void reorderAddress(JSONObject searches, StandardizedAddress address) {
         try {
-            JSONArray results = searchs.getJSONArray(SEARCHS_ATTR);
+            JSONArray results = searches.getJSONArray(SEARCHES_ATTR);
             List<StandardizedAddress> addresses = new ArrayList<>();
 
             addresses.add(address);
@@ -183,19 +183,19 @@ public class CacheManager {
 
             for (int index = 0; index < addresses.size(); index++) {
                 StandardizedAddress newAddress = addresses.get(index);
-                JSONObject search = convertAddresToJson(newAddress);
+                JSONObject search = convertAddressToJson(newAddress);
 
                 if (search != null) results.put(search);
             }
 
-            searchs.put(SEARCHS_ATTR, results);
-            saveSearchsJson(searchs.toString());
+            searches.put(SEARCHES_ATTR, results);
+            saveSearchesJson(searches.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private JSONObject convertAddresToJson(StandardizedAddress address) {
+    private JSONObject convertAddressToJson(StandardizedAddress address) {
         try {
             JSONObject jAddress = new JSONObject();
 
@@ -221,19 +221,19 @@ public class CacheManager {
         return null;
     }
 
-    private String getSearchsJson() {
-        return preferences.getString(SEARCHS_KEY, "");
+    private String getSearchesJson() {
+        return preferences.getString(SEARCHES_KEY, "");
     }
 
     public Observable<List<StandardizedAddress>> getAddress() {
         return Observable.unsafeCreate(new Observable.OnSubscribe<List<StandardizedAddress>>() {
             @Override
             public void call(Subscriber<? super List<StandardizedAddress>> subscriber) {
-                JSONObject searchs = getSearchs();
+                JSONObject searches = getSearches();
                 List<StandardizedAddress> addresses = new ArrayList<>();
 
                 try {
-                    JSONArray results = searchs.getJSONArray(SEARCHS_ATTR);
+                    JSONArray results = searches.getJSONArray(SEARCHES_ATTR);
 
                     for (int index = 0; index < results.length(); index++) {
                         StandardizedAddress result = parseAddress(results.getJSONObject(index));
@@ -254,7 +254,7 @@ public class CacheManager {
     }
 
     public StandardizedAddress findByStreetCode(int streetCode) {
-        Object document = Configuration.defaultConfiguration().jsonProvider().parse(getSearchsJson());
+        Object document = Configuration.defaultConfiguration().jsonProvider().parse(getSearchesJson());
         JSONArray addresses = JsonPath.read(document, "$.searchs[?(@.street_code == '" + streetCode + "')]");
 
         try {
@@ -276,7 +276,7 @@ public class CacheManager {
 
                 response.setSource(NormalizeResponse.CACHE);
 
-                Object document = Configuration.defaultConfiguration().jsonProvider().parse(getSearchsJson());
+                Object document = Configuration.defaultConfiguration().jsonProvider().parse(getSearchesJson());
                 DocumentContext dc = JsonPath.parse(document);
                 JSONArray addresses = dc.read("$.searchs[?]", JSONArray.class, new SearchAddressPredicate(query));
 
@@ -320,10 +320,10 @@ public class CacheManager {
         return address;
     }
 
-    private void saveSearchsJson(String json) {
+    private void saveSearchesJson(String json) {
         SharedPreferences.Editor editor = preferences.edit();
 
-        editor.putString(SEARCHS_KEY, json);
+        editor.putString(SEARCHES_KEY, json);
         editor.apply();
     }
 
@@ -352,7 +352,6 @@ public class CacheManager {
                 }
 
                 return ocurrences == queries.length;
-
             } catch (JSONException e) {
                 e.printStackTrace();
             }

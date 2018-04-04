@@ -35,7 +35,7 @@ public class CallejeroAdapter extends BaseAdapter {
         this.searchQueries = searchQuery.split("\\s+");
     }
 
-    public void addSearchs(List<StandardizedAddress> addresses) {
+    public void addSearches(List<StandardizedAddress> addresses) {
         if (addressList.isEmpty()) addressList.addAll(addresses);
 
         notifyDataSetChanged();
@@ -109,19 +109,19 @@ public class CallejeroAdapter extends BaseAdapter {
     }
 
     private SpannableString highlightMatches(String text) {
-        SpannableString highligthAddress = new SpannableString(text);
+        SpannableString highlightAddress = new SpannableString(text);
 
         for (String query : searchQueries) {
             try {
-                Matcher matcher = Pattern.compile(query, Pattern.CASE_INSENSITIVE).matcher(highligthAddress);
+                Matcher matcher = Pattern.compile(query, Pattern.CASE_INSENSITIVE).matcher(highlightAddress);
 
                 while (matcher.find()) {
-                    highligthAddress.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), matcher.start(), matcher.end(), 0);
+                    highlightAddress.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), matcher.start(), matcher.end(), 0);
                 }
             } catch (PatternSyntaxException e) { }
         }
 
-        return highligthAddress;
+        return highlightAddress;
     }
 
 }

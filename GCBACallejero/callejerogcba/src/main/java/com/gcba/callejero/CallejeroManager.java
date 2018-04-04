@@ -51,7 +51,7 @@ public class CallejeroManager {
      * @param location
      * @param locationCallBack
      */
-    public void loadAddressLaqtLongFromCABA(final AddressLocation location, final LocationCallBack locationCallBack) {
+    public void loadAddressLatLongFromCABA(final AddressLocation location, final LocationCallBack locationCallBack) {
         api.addressWithLatLong(location)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
@@ -113,7 +113,6 @@ public class CallejeroManager {
                     public void onNext(StandardizedAddress standardizedAddress) {
                         locationCallBack.onSuccess(standardizedAddress);
                     }
-
                 });
     }
 
@@ -137,7 +136,6 @@ public class CallejeroManager {
                 });
     }
 
-
     /**
      * El primer parámetro es la calle que se desea normalizar
      */
@@ -160,7 +158,6 @@ public class CallejeroManager {
                     }
                 });
     }
-
 
     /**
      * Devuelve una dirección normalizada después de ingresarle un string válido de calle. Funciona tanto para provincia como para capital en base al boolean onlyFromCaba

@@ -12,7 +12,7 @@ import com.google.gson.annotations.SerializedName;
 public class PlacesLocations implements Parcelable {
 
     @SerializedName("centroide")
-    private String controide;
+    private String centroide;
 
     @SerializedName("tipo")
     private String tipo;
@@ -21,7 +21,7 @@ public class PlacesLocations implements Parcelable {
     private Double y = -34.5588030592561353;
 
     public PlacesLocations(Parcel in) {
-        controide = in.readString();
+        centroide = in.readString();
         tipo = in.readString();
     }
 
@@ -41,12 +41,12 @@ public class PlacesLocations implements Parcelable {
         this.y = y;
     }
 
-    public String getControide() {
-        return controide;
+    public String getCentroide() {
+        return centroide;
     }
 
-    public void setControide(String controide) {
-        this.controide = controide;
+    public void setCentroide(String centroide) {
+        this.centroide = centroide;
     }
 
     public String getTipo() {
@@ -66,7 +66,7 @@ public class PlacesLocations implements Parcelable {
     @Override
     public String toString() {
         return "PlacesLocations{" +
-                "controide='" + controide + '\'' +
+                "centroide='" + centroide + '\'' +
                 ", tipo='" + tipo + '\'' +
                 '}';
     }
@@ -90,7 +90,7 @@ public class PlacesLocations implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(controide);
+        dest.writeString(centroide);
         dest.writeString(tipo);
     }
 

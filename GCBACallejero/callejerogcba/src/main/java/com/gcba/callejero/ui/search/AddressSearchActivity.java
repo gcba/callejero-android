@@ -291,7 +291,7 @@ public class AddressSearchActivity extends AppCompatActivity implements AddressS
         else {
             CallejeroAdapter adapter = (CallejeroAdapter) list.getAdapter();
 
-            adapter.addSearchs(addressList);
+            adapter.addSearches(addressList);
         }
 
         list.setVisibility(View.VISIBLE);

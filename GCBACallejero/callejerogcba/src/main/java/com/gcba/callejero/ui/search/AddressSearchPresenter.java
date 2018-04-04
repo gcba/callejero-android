@@ -78,7 +78,7 @@ public class AddressSearchPresenter {
 
         addressList = new ArrayList<>();
 
-        searchNormalizeAdress(query, onlyFromCABA);
+        searchNormalizeAddress(query, onlyFromCABA);
 
         if (charSequence.length() >= 4 && showPlaces) searchPlaces(query, showPlaces, charSequence);
     }
@@ -140,7 +140,7 @@ public class AddressSearchPresenter {
         });
     }
 
-    private void searchNormalizeAdress(final String query, boolean onlyFromCABA) {
+    private void searchNormalizeAddress(final String query, boolean onlyFromCABA) {
         CallejeroManager.getInstance().normalizeQuery(query, onlyFromCABA, new SearchCallback() {
             @Override
             public void onSuccess(NormalizeResponse normalize) {

@@ -39,7 +39,7 @@ public interface CallejeroApi {
                                     @Query("limit") String limit);
 
     @GET
-    Observable<PlacesObjectContent> searchPlacesobjectContent(@Url String url,
+    Observable<PlacesObjectContent> searchPlacesObjectContent(@Url String url,
                                                               @Query("id") String id,
                                                               @Query("srid") String srid);
 

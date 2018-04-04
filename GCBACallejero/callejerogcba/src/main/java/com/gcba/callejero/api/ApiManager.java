@@ -67,7 +67,7 @@ public class ApiManager {
     }
 
     public Observable<PlacesObjectContent> searchPlacesObjectContent(String idQuery) {
-        return api.searchPlacesobjectContent(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_GET_OBJECT_CONTENT, idQuery, "4326");
+        return api.searchPlacesObjectContent(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_GET_OBJECT_CONTENT, idQuery, "4326");
     }
 
     private Func1<ResponseBody, AddressLatLong> parseResponse() {

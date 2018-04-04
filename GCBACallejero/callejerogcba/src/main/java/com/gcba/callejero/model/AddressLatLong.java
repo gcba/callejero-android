@@ -21,7 +21,7 @@ public class AddressLatLong {
     private String doorY;
 
     @SerializedName("calle_alturas")
-    private String stretsNumbers;
+    private String streetNumbers;
 
     @SerializedName("esquina")
     private String corner;
@@ -75,12 +75,12 @@ public class AddressLatLong {
         return this;
     }
 
-    public String getStretsNumbers() {
-        return stretsNumbers;
+    public String getStreetNumbers() {
+        return streetNumbers;
     }
 
-    public AddressLatLong setStretsNumbers(String stretsNumbers) {
-        this.stretsNumbers = stretsNumbers;
+    public AddressLatLong setStreetNumbers(String streetNumbers) {
+        this.streetNumbers = streetNumbers;
 
         return this;
     }
