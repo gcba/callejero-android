@@ -11,7 +11,7 @@
 ## v1.2.2 - 31/01/2018
 
 ### Changed
-- Uncommented public method `loadAddressLaqtLongFromCaba`.
+- Uncommented public method `loadAddressLatLongFromCaba`.
 
 ## v1.2.1 - 29/01/2018
 
