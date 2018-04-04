@@ -32,6 +32,7 @@ public interface CallejeroApi {
     Observable<ResponseBody> addressWithLatLong(@Url String url,
                                                 @Query("x") double longitude,
                                                 @Query("y") double latitude);
+
     @GET
     Observable<Places> searchPlaces(@Url String url,
                                     @Query("texto") String query,
@@ -39,7 +40,7 @@ public interface CallejeroApi {
 
     @GET
     Observable<PlacesObjectContent> searchPlacesobjectContent(@Url String url,
-                                                              @Query("id" ) String id,
+                                                              @Query("id") String id,
                                                               @Query("srid") String srid);
 
 }

@@ -33,14 +33,12 @@ public class ApiManager {
 
     private CallejeroApi api;
 
-    public ApiManager(){
-
+    public ApiManager() {
         OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
 
-            HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            httpBuilder.interceptors().add(logging);
-
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        httpBuilder.interceptors().add(logging);
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://servicios.usig.buenosaires.gob.ar/")
@@ -50,48 +48,43 @@ public class ApiManager {
                 .build();
 
         api = retrofit.create(CallejeroApi.class);
-
-
     }
 
-    public Observable<NormalizeResponse> normalizeQuery( String query, boolean onlyFromCABA){
-        return api.normalizeQuery(CallejeroCTE.URL_NORMALIZE,query,  true, onlyFromCABA ? excludedCities : "");
+    public Observable<NormalizeResponse> normalizeQuery(String query, boolean onlyFromCABA) {
+        return api.normalizeQuery(CallejeroCTE.URL_NORMALIZE, query, true, onlyFromCABA ? excludedCities : "");
     }
 
-    public Observable<StandardizedAddress>  normalizeLocation(AddressLocation location){
-        return api.normalizeLocation(CallejeroCTE.URL_NORMALIZE,location.getX(), location.getY());
+    public Observable<StandardizedAddress> normalizeLocation(AddressLocation location) {
+        return api.normalizeLocation(CallejeroCTE.URL_NORMALIZE, location.getX(), location.getY());
     }
 
-    public Observable<AddressLatLong> addressWithLatLong (AddressLocation location){
-        return api.addressWithLatLong(CallejeroCTE.URL_LATLONG,location.getX(),location.getY())
-                .map(parseResponse());
+    public Observable<AddressLatLong> addressWithLatLong(AddressLocation location) {
+        return api.addressWithLatLong(CallejeroCTE.URL_LATLONG, location.getX(), location.getY()).map(parseResponse());
     }
 
     public Observable<Places> searchPlaces(String query) {
-        return api.searchPlaces(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_BUSCAR,  query,"5");
+        return api.searchPlaces(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_BUSCAR, query, "5");
     }
 
     public Observable<PlacesObjectContent> searchPlacesObjectContent(String idQuery) {
         return api.searchPlacesobjectContent(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_GET_OBJECT_CONTENT, idQuery, "4326");
     }
 
-    private Func1<ResponseBody, AddressLatLong> parseResponse(){
+    private Func1<ResponseBody, AddressLatLong> parseResponse() {
         return new Func1<ResponseBody, AddressLatLong>() {
             @Override
             public AddressLatLong call(ResponseBody responseBody) {
                 try {
-                    String response = responseBody.string().replace("("," ").replace(")"," ");
-                    return new Gson().fromJson(response,AddressLatLong.class);
+                    String response = responseBody.string().replace("(", " ").replace(")", " ");
+
+                    return new Gson().fromJson(response, AddressLatLong.class);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
                 return null;
             }
         };
-
-
     }
-
-
 
 }

@@ -68,9 +68,10 @@ public class CallejeroManager {
                     public void onNext(AddressLatLong addressLatLong) {
                         String[] s = addressLatLong.getDoor().split("\\s+");
                         int number = Integer.parseInt(s[s.length - 1]);
-                        StandardizedAddress address = new StandardizedAddress();
-                        address.setNumber(number);
                         StringBuilder sb = new StringBuilder();
+                        StandardizedAddress address = new StandardizedAddress();
+
+                        address.setNumber(number);
 
                         for (int i = 0; i < s.length - 1; i++) {
                             sb.append(s[i]);
@@ -183,7 +184,6 @@ public class CallejeroManager {
 
                     @Override
                     public void onNext(NormalizeResponse normalizeResponse) {
-
                         searchCallback.onSuccess(normalizeResponse);
                     }
                 });
