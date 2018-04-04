@@ -63,5 +63,8 @@ fastlane/screenshots
 fastlane/test_output
 fastlane/readme.md
 
+# Visual Studio Code
+.vscode/
+
 # MacOS
 .DS_Store
