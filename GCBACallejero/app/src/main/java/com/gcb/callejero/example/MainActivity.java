@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gcba.callejero.CallejeroOptions;
-import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.SelectionCallback;
 import com.gcba.callejero.model.AddressLocation;
 import com.gcba.callejero.model.StandardizedAddress;
@@ -109,12 +108,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSelectedPin() {
                 queFuncionEstaUsando.setText("PIN");
-                //Toast.makeText(MainActivity.this, "onSelectedPin", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MainActivity.this, "onSelectedPin", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onSelectionLabel(String direction) {
-                //callejeroView.setSelectedAddress(direction);
+                // callejeroView.setSelectedAddress(direction);
                 queFuncionEstaUsando.setText(direction);
                 Toast.makeText(MainActivity.this, direction, Toast.LENGTH_SHORT).show();
             }
@@ -146,7 +145,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callejeroView.onActivityResult(requestCode, resultCode, data);
-        CallejeroManager.getInstance().onActivityResult(requestCode, resultCode, data);
     }
 
 }
