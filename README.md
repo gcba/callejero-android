@@ -12,7 +12,7 @@ File > New > New Module... > Import .JAR/.AAR Package
 
 ## Uso
 
-El componente se puede utilizar con una vista llamada `CallejeroView` que se encarga de mostrar la dirección e iniciar la búsqueda u obtenerla mediante la ubicación del dispositivo. También se puede hacer la búsqueda programáticamente mediante la clase `CallejeroManager`.
+El componente se puede utilizar con una vista llamada `CallejeroView` que se encarga de mostrar la dirección e iniciar la búsqueda (u obtenerla mediante la ubicación del dispositivo). También se puede hacer la búsqueda programáticamente mediante la clase `CallejeroManager`.
 
 ### CallejeroView
 
@@ -67,7 +67,7 @@ public void onAddressSelection(StandardizedAddress address) {
 }
 ```
 
-Para registrar la implementación de la interfaz, usar el método `setSelectionCallback`.
+La implementación de la interfaz se debe registrar con el método `setSelectionCallback`.
 
 ```java
 callejeroView.setSelectionCallback(new SelectionCallback() {
