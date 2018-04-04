@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 options.setShowPin(isChecked);
+                callejeroView.setOptions(options);
             }
         });
 
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 options.setShowLabel(!isChecked);
                 callejeroView.setOptions(options);
-
             }
         });
 
