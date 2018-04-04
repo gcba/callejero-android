@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.gcba.callejero.CallejeroOptions;
 import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.SelectionCallback;
@@ -20,39 +21,40 @@ import com.gcba.callejero.ui.CallejeroView;
 
 public class MainActivity extends AppCompatActivity {
 
-
     private CallejeroView callejeroView;
     private AddressLocation location;
-    Switch switchButton;
     private TextView queFuncionEstaUsando;
-    CallejeroOptions options = new CallejeroOptions();
-
     private TextView locationX;
     private TextView locationY;
+    Switch switchButton;
+
+    CallejeroOptions options = new CallejeroOptions();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         location = new AddressLocation();
+
         location.setY(-34.544028);
         location.setX(-58.482504);
 
         callejeroView = (CallejeroView) findViewById(R.id.callejero);
-
         switchButton = (Switch) findViewById(R.id.switchButton);
+
         switchButton.setChecked(false);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 options.setShowPin(isChecked);
-
             }
         });
 
         queFuncionEstaUsando = (TextView) findViewById(R.id.Direccion);
         switchButton = (Switch) findViewById(R.id.switchButton2);
+
         switchButton.setChecked(true);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -63,30 +65,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         Switch switchButton2 = (Switch) findViewById(R.id.switchButtonShowPlaces);
+
         switchButton2.setChecked(false);
         switchButton2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    options.setShowPlaces(isChecked);
-                    callejeroView.setOptions(options);
+                options.setShowPlaces(isChecked);
+                callejeroView.setOptions(options);
 
             }
         });
 
         switchButton = (Switch) findViewById(R.id.switchButton3);
+
         switchButton.setChecked(false);
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                     options.setShowOnlyFromCaba(isChecked);
-                    callejeroView.setOptions(options);
+                options.setShowOnlyFromCaba(isChecked);
+                callejeroView.setOptions(options);
 
             }
         });
 
         allowCallejeroLocation();
+
         callejeroView.setSelectionCallback(new SelectionCallback() {
             @Override
             public void onAddressSelection(StandardizedAddress address) {
@@ -95,16 +99,11 @@ public class MainActivity extends AppCompatActivity {
                 locationX.setText(String.valueOf(location.getX()));
                 locationY.setText(String.valueOf(location.getY()));
                 locationY.setText(address.toString());
-
-
-
-
             }
 
             @Override
             public void onCancel() {
                 Toast.makeText(MainActivity.this, "onCancel", Toast.LENGTH_SHORT).show();
-
             }
 
             @Override
@@ -112,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
                 queFuncionEstaUsando.setText("PIN");
                 //Toast.makeText(MainActivity.this, "onSelectedPin", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onSelectionLabel(String direction) {
                 //callejeroView.setSelectedAddress(direction);
@@ -119,6 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, direction, Toast.LENGTH_SHORT).show();
             }
         });
+
         locationX = (TextView) findViewById(R.id.location_x);
         locationY = (TextView) findViewById(R.id.location_y);
     }
@@ -132,14 +133,13 @@ public class MainActivity extends AppCompatActivity {
         callejeroView.enabledLocation();
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         if (requestCode == 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             allowCallejeroLocation();
         }
-
     }
 
     @Override
@@ -148,6 +148,5 @@ public class MainActivity extends AppCompatActivity {
         callejeroView.onActivityResult(requestCode, resultCode, data);
         CallejeroManager.getInstance().onActivityResult(requestCode, resultCode, data);
     }
-
 
 }
