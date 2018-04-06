@@ -33,4 +33,4 @@ install:
 before_script: cd GCBACallejero
 script:
 - ./gradlew :callejerogcba:assembleRelease
-# - gradle :app:assembleDebug
+- ./gradlew :app:assembleDebug
