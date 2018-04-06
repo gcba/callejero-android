@@ -28,5 +28,5 @@ android:
     # - sys-img-armeabi-v7a-android-17
 before_script: cd GCBACallejero
 script:
-- gradle :callejerogcba:assembleRelease
-- gradle :app:assembleDebug
+- ./gradlew :callejerogcba:assembleRelease
+# - gradle :app:assembleDebug
