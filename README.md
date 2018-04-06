@@ -23,6 +23,8 @@ El componente se puede utilizar con una vista llamada `CallejeroView` que se enc
     android:layout_height="wrap_content" />
 ```
 
+![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview.png "CallejeroView")
+
 Es necesario sobreescribir el método `onActivityResult` en la activity donde se use la instancia de `CallejeroView` (para poder recibir el resultado de búsqueda).
 
 ```java
@@ -34,6 +36,8 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 ```
 
 #### Carga mediante GPS
+
+![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-location.png "Dirección mediante GPS")
 
 Para habilitar un botón que cargue la dirección con la ubicación del dispositivo, llamar al método `enabledLocation`.
 
@@ -99,6 +103,8 @@ CallejeroOptions options = new CallejeroOptions();
 
 ##### Búsquedas en AMBA
 
+![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-amba.png "Dirección de AMBA")
+
 Para ampliar la búsqueda a direcciones del AMBA, usar el método `setShowOnlyFromCaba`. Por defecto la búsqueda se limita a direcciones de CABA.
 
 ```java
@@ -107,6 +113,8 @@ callejeroView.setOptions(options);
 ```
 
 ##### No forzar normalización
+
+![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-normalization.png "Dirección no normalizada")
 
 Para permitir que el usuario pueda seleccionar una dirección no normalizada, llamar al método `setShowLabel`. Por defecto se fuerza la normalización de direcciones.
 
@@ -119,6 +127,8 @@ Si el usuario tapea la dirección no normalizada, no se la obtiene a través del
 
 ##### Incluir lugares
 
+![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-places.png "Búsqueda de lugares")
+
 Para mostrar lugares entre los resultados de búsqueda, usar el método `setShowPlaces`.
 
 ```java
@@ -127,6 +137,8 @@ callejeroView.setOptions(options);
 ```
 
 ##### Mostrar pin
+
+![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-pin.png "Botón con pin")
 
 Es posible mostrar al final de los resultados de búsqueda un botón con la imagen de un [pin](https://www.google.com.ar/search?q=map+pin) y el texto **Fijar la ubicación en el mapa**, con el método `setShowPin`. Por defecto no se muestra el pin.
 
