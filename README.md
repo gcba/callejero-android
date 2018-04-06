@@ -1,5 +1,7 @@
 # Callejero Android
 
+[![Build Status](https://img.shields.io/travis/gcba/callejero-android/master.svg)](https://travis-ci.org/gcba/callejero-android)
+
 Cliente Android del servicio de normalización de direcciones de USIG para CABA y AMBA.
 
 ## Instalación
@@ -39,7 +41,7 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
 ![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-location.png "Dirección mediante GPS")
 
-Para habilitar un botón que cargue la dirección con la ubicación del dispositivo, llamar al método `enabledLocation`.
+Con el método `enabledLocation` se puede habilitar un botón que cargue la dirección en base a la ubicación del dispositivo.
 
 ```java
 callejeroView = (CallejeroView) findViewById(R.id.callejero);
@@ -116,20 +118,20 @@ callejeroView.setOptions(options);
 
 ![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-normalization.png "Dirección no normalizada")
 
-Para permitir que el usuario pueda seleccionar una dirección no normalizada, llamar al método `setShowLabel`. Por defecto se fuerza la normalización de direcciones.
+Para permitir que el usuario pueda seleccionar una dirección no normalizada, llamar al método `setShowLabel`. Cuando esta opción está activada, el input del usuario se muestra como el primer resultado de búsqueda. Por defecto se fuerza la normalización de direcciones.
 
 ```java
 options.setShowLabel(true);
 callejeroView.setOptions(options);
 ```
 
-Si el usuario tapea la dirección no normalizada, no se la obtiene a través del callback `onAddressSelection` sino de `onSelectionLabel` (como un string, en vez de `StandardizedAddress`).
+Si el usuario tapea la dirección no normalizada, no se la obtiene a través del callback `onAddressSelection` sino de `onSelectionLabel` (como un string, en vez de un objeto `StandardizedAddress`).
 
 ##### Incluir lugares
 
 ![Screenshot](https://raw.githubusercontent.com/gcba/callejero-android/master/screenshots/callejeroview-places.png "Búsqueda de lugares")
 
-Para mostrar lugares entre los resultados de búsqueda, usar el método `setShowPlaces`.
+Usar el método `setShowPlaces` para incluir lugares entre los resultados de búsqueda.
 
 ```java
 options.setShowPlaces(true);
