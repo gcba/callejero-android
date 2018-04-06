@@ -205,7 +205,7 @@ CallejeroManager.getInstance().loadAddressLatLongFromCABA(location, new Location
 
 ##### Esquina más cercana
 
-Para obtener la dirección de la esquina más cercana a una latitud y longitud se emplea el método `loadAddressLatLong`. Este método recibe dos parámetros: un objeto `AddressLocation` con las coordenadas y un `LocationCallback`.
+El método `loadAddressLatLong` permite obtener la dirección de la esquina más cercana a una latitud y longitud. Este método recibe dos parámetros: un objeto `AddressLocation` con las coordenadas y un `LocationCallback`.
 
 ```java
 AddressLocation location = new AddressLocation();
@@ -228,7 +228,7 @@ CallejeroManager.getInstance().loadAddressLatLong(location, new LocationCallBack
 
 #### Iniciar programáticamente la UI de búsqueda
 
-Para mostrar la interfaz de búsqueda de forma programática (sin usar el `CallejeroView`) se puede usar el método `startSearch`. Este método recibe 4 parámetros: una instancia de la activity que inicia la búsqueda, un objeto `CallejeroOptions` con opciones, un entero para usar como `requestCode` y un `SelectionCallback`.
+Para mostrar la interfaz de búsqueda de forma programática (sin usar el `CallejeroView`) se usa el método `startSearch`. Este método recibe 4 parámetros: una instancia de la activity que inicia la búsqueda, un objeto `CallejeroOptions` con opciones, un entero para usar como `requestCode` y un `SelectionCallback`.
 
 ```java
 CallejeroOptions options = new CallejeroOptions();
