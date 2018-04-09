@@ -2,7 +2,7 @@
 
 [![Build Status](https://img.shields.io/travis/gcba/callejero-android/master.svg)](https://travis-ci.org/gcba/callejero-android)
 
-Cliente Android del servicio de normalización de direcciones de USIG para CABA y AMBA.
+Cliente Android del [servicio de normalización de direcciones de USIG](http://servicios.usig.buenosaires.gob.ar/normalizar) para CABA y AMBA.
 
 ## Instalación
 
