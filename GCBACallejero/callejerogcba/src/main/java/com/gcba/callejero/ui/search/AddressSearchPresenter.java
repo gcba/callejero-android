@@ -108,7 +108,7 @@ public class AddressSearchPresenter {
     }
 
     /**
-     * Busca instancias de lugar, si tiene una dirección la normaliza y agrega como standarized address, sino la descarta
+     * Busca instancias de lugar, si tiene una dirección la normaliza y agrega como standardized address, sino la descarta
      */
     private void intanceToStandarizedAddress(final String placeName, PlaceInstancias instance) {
         CallejeroManager.getInstance().loadPlacesObjectContent(instance.getId(), new LocationCallbackPlacesObjectCntent() {
@@ -124,7 +124,7 @@ public class AddressSearchPresenter {
                                 sa.setPlaceName(placeName);
                                 sa.setName(placeName);
 
-                                Log.i("CALLEJERO", "resultado de la normalizacion " + sa.getStreetName());
+                                Log.i("CALLEJERO", "resultado de la normalización " + sa.getStreetName());
                                 addResult(objectContent.getDireccionNormalizada(), sa);
                             }
                         }
