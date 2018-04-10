@@ -159,6 +159,8 @@ public class AddressSearchPresenter {
 
             @Override
             public void onError(Throwable error) {
+                if (view == null) return;
+
                 view.onResultError();
             }
         });
