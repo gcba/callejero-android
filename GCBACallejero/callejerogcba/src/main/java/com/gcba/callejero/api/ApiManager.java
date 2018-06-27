@@ -63,7 +63,7 @@ public class ApiManager {
     }
 
     public Observable<Places> searchPlaces(String query) {
-        return api.searchPlaces(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_BUSCAR, query, "5");
+        return api.searchPlaces(CallejeroCTE.URL_EPOK_BUENOSAIRES_GOB_AR_BUSCAR, query, "10");
     }
 
     public Observable<PlacesObjectContent> searchPlacesObjectContent(String idQuery) {
