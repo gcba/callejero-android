@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+- EPOK search limit from 5 to 10 (iOS default).
+
 ## v1.2.3 - 01/02/2018
 
 ### Added
