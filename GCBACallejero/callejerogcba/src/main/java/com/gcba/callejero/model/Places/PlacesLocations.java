@@ -17,8 +17,8 @@ public class PlacesLocations implements Parcelable {
     @SerializedName("tipo")
     private String tipo;
 
-    private Double x = -58.4169274781971595;
-    private Double y = -34.5588030592561353;
+    private Double x = 0.0;
+    private Double y = 0.0;
 
     public PlacesLocations(Parcel in) {
         centroide = in.readString();

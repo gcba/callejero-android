@@ -3,9 +3,11 @@ package com.gcba.callejero.ui.search;
 import android.content.Context;
 import android.util.Log;
 
+import com.gcba.callejero.CallejeroCTE;
 import com.gcba.callejero.CallejeroManager;
 import com.gcba.callejero.SearchCallback;
 import com.gcba.callejero.cache.CacheManager;
+import com.gcba.callejero.model.AddressLocation;
 import com.gcba.callejero.model.NormalizeResponse;
 import com.gcba.callejero.model.Places.PlaceInstancias;
 import com.gcba.callejero.model.Places.Places;
@@ -126,17 +128,40 @@ public class AddressSearchPresenter {
 
                                 Log.i("CALLEJERO", "resultado de la normalización " + sa.getStreetName());
                                 addResult(objectContent.getDireccionNormalizada(), sa);
+                            }else{
+                                if ("sitios_de_interes|172".equalsIgnoreCase(objectContent.getId())){
+                                    Log.d("CALLEJERO", " no pudo normalizar lugar");
+                                    AddressLocation al=new AddressLocation();
+                                    al.setX(-34.809370);
+                                    al.setY(-58.543533);
+
+                                    StandardizedAddress sa = new StandardizedAddress();
+                                    sa.setName("Aeropuerto Internacional de Ezeiza");
+                                    sa.setPlaceName("Aeropuerto Internacional de Ezeiza");
+                                    sa.setLocation(al);
+                                    sa.setType(CallejeroCTE.CALLE_CALLE);
+
+                                    addResult(objectContent.getDireccionNormalizada(),sa);
+                                }
                             }
                         }
 
                         @Override
-                        public void onError(Throwable error) { }
+                        public void onError(Throwable error) {
+                            Log.d("CALLEJERO", " error normalizar lugar");
+                        }
                     });
+                }else{
+                    Log.d("CALLEJERO","descarto lugar " + objectContent.getId() );
+
+
                 }
             }
 
             @Override
-            public void onError(Throwable error) { }
+            public void onError(Throwable error) {
+                Log.d("CALLEJERO", " no pudo buscar lugar");
+            }
         });
     }
 
