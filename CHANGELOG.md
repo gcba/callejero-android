@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.2.5 - 10/04/2019
+
+### Changed
+- Http to Https 
+
 ## v1.2.4 - 29/06/2018
 
 ### Changed

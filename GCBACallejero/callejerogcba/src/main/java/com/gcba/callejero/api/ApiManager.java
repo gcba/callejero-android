@@ -41,7 +41,7 @@ public class ApiManager {
         httpBuilder.interceptors().add(logging);
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://servicios.usig.buenosaires.gob.ar/")
+                .baseUrl("https://servicios.usig.buenosaires.gob.ar/")
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(httpBuilder.build())

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * Created by gcbamobile on 22/12/17.
  * Esta clase es el modelo para la respuesta del servicio epok getObjectContent <br>
- * http://epok.buenosaires.gob.ar/getObjectContent/?id=dependencias_culturales|547
+ * https://epok.buenosaires.gob.ar/getObjectContent/?id=dependencias_culturales|547
  */
 
 public class PlacesObjectContent implements Parcelable {
