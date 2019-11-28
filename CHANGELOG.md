@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.2.7 - 28/11/2019
+- Fixes Android 8.0.0 (API 26) bug, incompatibility between windowIsTranslucent and screenOrientation.
+
+## v1.2.6 - 27/11/2019
+- Updates target SDK to 28.
+
 ## v1.2.5 - 10/04/2019
 
 ### Changed

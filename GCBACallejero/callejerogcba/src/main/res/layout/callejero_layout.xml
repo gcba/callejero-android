@@ -10,8 +10,6 @@
         android:background="@drawable/claim_input_background"
         android:ellipsize="end"/>
 
-
-
     <View
         android:id="@+id/callejero_divider"
         android:background="@android:color/transparent"
@@ -27,7 +25,5 @@
         android:visibility="gone"
         android:layout_centerVertical="true"
         android:src="@drawable/ic_callejero_my_location"/>
-
-
 
 </merge>
